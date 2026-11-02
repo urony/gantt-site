@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מדריך למורים | מערכת ליווי עבודות גמר</title>
+<style>
+body{font-family:system-ui,"Segoe UI",Arial,sans-serif;line-height:1.75;max-width:50rem;margin:0 auto;padding:1.5rem 1rem 4rem;color:#1b1f24;background:#fff}
+h1{font-size:1.8rem;margin-bottom:.2rem}h2{font-size:1.3rem;margin-top:2rem;border-bottom:1px solid #d9dee4;padding-bottom:.2rem}h3{font-size:1.1rem}
+nav{font-size:.95rem;margin-bottom:1.5rem}nav a{margin-inline-end:1rem}
+.note{background:#fff8e1;border:1px solid #f0d98a;border-radius:8px;padding:.7rem 1rem;margin:1rem 0}
+.en{direction:ltr;text-align:left;border-top:2px solid #d9dee4;margin-top:3rem;padding-top:1rem}
+table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid #d9dee4;padding:.4rem .6rem;vertical-align:top;text-align:start}th{background:#f3f5f8}
+code{background:#f3f5f8;padding:0 .3rem;border-radius:4px}
+.muted{color:#5b6570;font-size:.9rem}
+</style>
+</head>
+<body>
+<nav><a href="../">דף הבית</a><a href="privacy.html">מדיניות פרטיות</a><a href="terms.html">תנאי שימוש</a><a href="teachers.html">מדריך למורים</a><a href="../join/">הצטרפות מורים</a></nav>
+<h1>מדריך למורים: הקמת המערכת שלכם</h1>
+<p>ההקמה לוקחת כ-5 דקות, בלי קוד ובלי עזרה. כל הנתונים יישמרו ב-Google Drive שלכם, ולא אצל מפעיל האתר. <a href="../join/">התחילו בדף ההצטרפות</a>.</p>
+
+<h2>מה צריך</h2>
+<ul>
+<li>חשבון Google אישי (Gmail). מומלץ לא להשתמש בחשבון של בית ספר, כי ארגונים לעיתים חוסמים את ההקמה.</li>
+<li>5 דקות רצופות וחיבור יציב לאינטרנט. אין צורך באמצעי תשלום.</li>
+</ul>
+
+<h2>למה Google מציגה אזהרה, והאם זה בסדר</h2>
+<div class="note">
+<p>בהקמה תופיע אזהרה: <strong>"Google hasn't verified this app"</strong> (או "Google לא אימתה את האפליקציה הזו").</p>
+<p><strong>זה צפוי ואינו סימן לבעיה.</strong> האזהרה מופיעה על כל אפליקציה שעדיין לא עברה את תהליך האימות הרשמי של Google. עד שהאימות יושלם, Google מבקשת מכם לאשר ידנית.</p>
+<p>בדקו לפני שממשיכים: (1) שם האפליקציה הוא <strong>"מערכת ליווי עבודות גמר - הקמה"</strong>; (2) הגעתם בקישור שקיבלתם ממי שהמליץ לכם על המערכת, ושכתובת הדף היא של האתר הזה. אם כן, אפשר להמשיך. אם אחד מהם לא תואם, עצרו.</p>
+</div>
+<p>האזהרה מופיעה בשני מקומות. בשניהם לא לוחצים על הכפתור הכחול הגדול ("Back to safety"), אלא על ההמשך הקטן:</p>
+<ol>
+<li><strong>בהתחברות הראשונה בדף ההצטרפות:</strong> לחצו <code>Continue</code> (או "מתקדם" ואז "מעבר אל ... (לא בטוח)").</li>
+<li><strong>באישור השרת שלכם:</strong> לחצו "Review permissions", בחרו את החשבון שלכם, לחצו "מתקדם" ואז "מעבר אל ... (לא בטוח)", סמנו "בחירת הכול" ולחצו "המשך". כאן השרת הוא הסקריפט שנוצר <em>בחשבון שלכם</em>, ולכן Google מציגה אותו כ"לא מאומת".</li>
+</ol>
+
+<h2>השלבים</h2>
+<ol>
+<li><strong>פתחו את דף ההצטרפות</strong> והתחברו עם ה-Gmail שלכם.</li>
+<li><strong>הפעילו את Google Apps Script API (חד-פעמי):</strong> הדף יציג כפתור "פתיחת ההגדרות". אם נפתח במקום זאת דף פרסומי עם הכותרת <code>Automate &amp; extend Google Workspace with simple code</code> וכפתור כחול <code>Sign in</code>: זה לא דף ההגדרות. לחצו <code>Sign in</code>, התחברו עם אותו Gmail, ואם נשארתם בדף הפרסומי, פתחו שוב את הקישור "פתיחת ההגדרות" מדף ההצטרפות. בדף ההגדרות הדליקו את המתג <code>Google Apps Script API</code> (אם הוא כבר <code>On</code>, אין צורך לעשות דבר) וחזרו ללשונית ההצטרפות.</li>
+<li><strong>התחברות עם Google ואישור הרשאות:</strong> סמנו את כל התיבות. ההרשאות האלה משמשות להקמה בלבד.</li>
+<li><strong>המתינו כחצי דקה</strong> שההקמה תסתיים. אל תסגרו את הלשונית.</li>
+<li><strong>אישור השרת שלכם</strong> (ראו למעלה), ואז <strong>הקמת תיקיית הנתונים.</strong></li>
+<li><strong>קישור לתלמידים:</strong> בסוף תקבלו קישור. הוא מיועד לכם ולתלמידים שלכם. שמרו אותו.</li>
+</ol>
+
+<h2>אחרי ההקמה</h2>
+<ul>
+<li>היכנסו עם הקישור, התחברו עם אותו חשבון Google, והוסיפו תלמידים וקבוצות.</li>
+<li>תלמידים נכנסים עם הקישור, עם חשבון ה-Google שרשמתם. לפני הכניסה הם יראו את כתובת הדוא"ל שלכם ויתבקשו לאשר שזה המורה שלהם: אמרו להם מראש מהי הכתובת.</li>
+<li>הגיבוי: במסך "גיבוי ושחזור" הורידו גיבוי אחת לשבוע.</li>
+</ul>
+
+<h2>בעיות נפוצות</h2>
+<table>
+<tr><th>מה רואים</th><th>מה עושים</th></tr>
+<tr><td>"Access blocked" או "האפליקציה לא זמינה"</td><td>האפליקציה עדיין לא פתוחה לחשבון שלכם, או שמכסת המצטרפים בשלב הפיילוט התמלאה. פנו למפעיל האתר.</td></tr>
+<tr><td>ההקמה נעצרת בצעד הראשון עם שגיאה</td><td>לחצו "נסו שוב". אם חוזר, שלחו למפעיל את הטקסט שמופיע ב"פירוט טכני".</td></tr>
+<tr><td>חשבון בית ספר חוסם יצירת פרויקטים</td><td>השתמשו ב-Gmail פרטי.</td></tr>
+<tr><td>הדף הפסיק באמצע</td><td>חזרו לדף ההצטרפות ובחרו "כבר התחלתי בעבר": ההתקדמות נשמרה.</td></tr>
+</table>
+
+<h2>ביטול והסרה</h2>
+<p>אפשר למחוק את תיקיית הנתונים ב-Drive ואת פרויקט ה-Apps Script שלכם, ולבטל הרשאות ב-<a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>. פרטים בעמוד <a href="privacy.html">מדיניות הפרטיות</a>.</p>
+</body>
+</html>

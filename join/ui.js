@@ -1,11 +1,12 @@
 // ממשק משגר המוצר (עברית). הלוגיקה בפועל נמצאת ב-flow.js (נבדקת בבדיקות); כאן רק תצוגה, חיבור ל-Google Identity ופעולות הדפדפן.
 // האסימון נשמר בזיכרון הדף בלבד. באחסון המקומי נשמרים רק מזהים ציבוריים ושני סימוני "קראתי / הפעלתי".
-import { createSetupFlow, STEPS, SCOPES } from './flow.js';
+import { createSetupFlow, STEPS, SCOPES as FULL_SCOPES, NARROW_SCOPES } from './flow.js';
 import { createDemoGoogle } from './demo-google.js';
 import { loadVerifiedPackage } from './lib/package-loader.js';
 import { sha512 } from './lib/sha512.js';
 
 const cfg = window.LAUNCHER_CONFIG;
+const SCOPES = cfg && cfg.narrowScopes ? NARROW_SCOPES : FULL_SCOPES;
 const $ = (id) => document.getElementById(id);
 const UI_KEY = 'gantt-launcher-ui-v1';
 let token = null;

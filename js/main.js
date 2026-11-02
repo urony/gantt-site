@@ -27,6 +27,7 @@ const $app = document.getElementById('app');
 const $dlg = document.getElementById('dlg');
 const $toast = document.getElementById('toast');
 const esc = L.escapeHtml;
+if (remoteMode && !config.testLogin) document.body.classList.add('prod'); // שרת אמיתי של מורה: בלי תווית "דמו"
 if (remoteMode) document.body.classList.add('remote'); // מסתיר כלי דמו (איפוס, הדמיות); השרת חוסם אותם גם בלי זה
 
 let state = null;
@@ -291,7 +292,17 @@ function renderLogin() {
   if (remoteMode) { renderRemoteLogin(); return; }
   // אתר מרובה מורים: בלי קישור אישי של מורה אין שרת לפנות אליו, ולכן לא מציגים דמו אלא הסבר
   if (config.requireServer) {
-    $app.innerHTML = '<div class="login"><div class="card"><h1>מערכת ליווי פרויקט גמר</h1><p>כדי להיכנס צריך את הקישור האישי שקיבלתם מהמורה.</p><p class="muted">אם אתם מורים ורוצים להצטרף למערכת, היכנסו לדף ההצטרפות.</p></div></div>';
+    // דף הבית הציבורי (גם דף הבית שנדרש לאימות Google): מה המערכת עושה, איך מצטרפים, וקישורי פרטיות ותנאים
+    $app.innerHTML = `<div class="login"><div class="card">
+      <h1>מערכת ליווי עבודות גמר</h1>
+      <p>כלי חינוכי למורים ולתלמידים: המורה מנהל מחזור עבודות גמר, מגדיר משימות ומועדים, מקבל הגשות של תלמידים (Word עם המרה ל-PDF), כותב הערות על העבודה, שולח משוב ומפרסם ציונים. התלמיד רואה את המשימות, ההגשות, ההערות והציון שלו.</p>
+      <p><strong>הנתונים נשמרים בחשבון Google של המורה, לא אצלנו.</strong> כל מורה מקבל מערכת עצמאית משלו, בלי שרת מרכזי ובלי מסד נתונים של מפעיל האתר.</p>
+      <h2>תלמידים</h2>
+      <p>כדי להיכנס צריך את הקישור האישי שקיבלתם מהמורה.</p>
+      <h2>מורים</h2>
+      <p><a class="btn primary" href="join/">הצטרפות והקמת מערכת (5 דקות)</a> &nbsp; <a href="pages/teachers.html">מדריך הקמה למורים</a></p>
+      <p class="muted"><a href="pages/privacy.html">מדיניות פרטיות</a> · <a href="pages/terms.html">תנאי שימוש</a></p>
+    </div></div>`;
     return;
   }
   const opts = state.loginOptions || [];

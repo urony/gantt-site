@@ -6,5 +6,6 @@ window.LAUNCHER_CONFIG = {
   "appUrl": "https://urony.github.io/gantt-site/",
   "triggerEveryMin": 0,
   "testMode": false,
-  "demo": false
+  "demo": false,
+  "narrowScopes": false
 };

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מדיניות פרטיות | מערכת ליווי עבודות גמר</title>
+<style>
+body{font-family:system-ui,"Segoe UI",Arial,sans-serif;line-height:1.75;max-width:50rem;margin:0 auto;padding:1.5rem 1rem 4rem;color:#1b1f24;background:#fff}
+h1{font-size:1.8rem;margin-bottom:.2rem}h2{font-size:1.3rem;margin-top:2rem;border-bottom:1px solid #d9dee4;padding-bottom:.2rem}h3{font-size:1.1rem}
+nav{font-size:.95rem;margin-bottom:1.5rem}nav a{margin-inline-end:1rem}
+.note{background:#fff8e1;border:1px solid #f0d98a;border-radius:8px;padding:.7rem 1rem;margin:1rem 0}
+.en{direction:ltr;text-align:left;border-top:2px solid #d9dee4;margin-top:3rem;padding-top:1rem}
+table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid #d9dee4;padding:.4rem .6rem;vertical-align:top;text-align:start}th{background:#f3f5f8}
+code{background:#f3f5f8;padding:0 .3rem;border-radius:4px}
+.muted{color:#5b6570;font-size:.9rem}
+</style>
+</head>
+<body>
+<nav><a href="../">דף הבית</a><a href="privacy.html">מדיניות פרטיות</a><a href="terms.html">תנאי שימוש</a><a href="teachers.html">מדריך למורים</a><a href="../join/">הצטרפות מורים</a></nav>
+<h1>מדיניות פרטיות</h1>
+<p class="muted">מערכת ליווי עבודות גמר ("המערכת") · עדכון אחרון: 2026-11-02 · מפעיל האתר: אורי העליון · פניות בנושא פרטיות: <a href="mailto:uribyology@gmail.com">uribyology@gmail.com</a></p>
+
+<h2>1. בקצרה</h2>
+<p>המערכת עוזרת למורה ללוות תלמידים בעבודת גמר: מועדים, משימות, הגשת קבצים, הערות ומשוב. <strong>כל הנתונים נשמרים בחשבון Google של המורה שהקים את המערכת, ולא אצל מפעיל האתר.</strong> מפעיל האתר אינו רואה, אינו מקבל ואינו שומר שמות תלמידים, עבודות, הערות או ציונים.</p>
+
+<h2>2. איך המערכת בנויה</h2>
+<ul>
+<li><strong>האתר</strong> הוא קבצים סטטיים (דפדפן בלבד) המוגשים מ-GitHub Pages. אין בו מסד נתונים של מפעיל האתר.</li>
+<li><strong>שרת המורה:</strong> כל מורה מקבל עותק של קוד המערכת בחשבון Google שלו (Google Apps Script). השרת רץ בחשבון המורה ובשמו.</li>
+<li><strong>האחסון:</strong> הנתונים נשמרים בתיקיות Google Drive של המורה ובמאפייני הסקריפט שבחשבונו.</li>
+<li><strong>עדכונים:</strong> שרת המורה בודק מעת לעת באתר הציבורי אם קיימת גרסה חדשה, מוודא שהיא חתומה דיגיטלית על ידי מפעיל האתר, ומתקין אותה. בבדיקה זו לא נשלח לאתר שום מידע אישי או נתוני תלמידים.</li>
+</ul>
+<p>לכן <strong>המורה הוא בעל המידע ובעל השליטה בו</strong>, כמו בכל מסמך שהוא שומר ב-Drive שלו.</p>
+
+<h2>3. איזה מידע נשמר, ואצל מי</h2>
+<table>
+<tr><th>מידע</th><th>מי מזין</th><th>איפה נשמר</th><th>מי רואה</th></tr>
+<tr><td>שם ודוא"ל של תלמיד (לפי רשימת המורה)</td><td>המורה</td><td>Drive של המורה</td><td>המורה; התלמיד רואה את עצמו</td></tr>
+<tr><td>זיהוי בכניסה (דוא"ל ושם מחשבון Google)</td><td>Google</td><td>נבדק מול רשימת המורה בשרת המורה</td><td>המורה</td></tr>
+<tr><td>מחזורים, משימות, מועדים, קבוצות</td><td>המורה</td><td>Drive של המורה</td><td>המורה והתלמידים הרלוונטיים</td></tr>
+<tr><td>קבצי הגשה (Word/PDF)</td><td>התלמיד</td><td>Drive של המורה</td><td>המורה; התלמיד רואה את שלו</td></tr>
+<tr><td>הערות, משוב וציון</td><td>המורה</td><td>Drive של המורה</td><td>המורה; התלמיד רואה את המשוב והציון שלו</td></tr>
+<tr><td>יומן טכני של עדכוני גרסה</td><td>השרת</td><td>מאפייני הסקריפט של המורה</td><td>המורה (בעלים) בלבד</td></tr>
+</table>
+<p>אין איסוף של מיקום, טלפון, תעודת זהות, פרטי תשלום, פרסומות או מעקב שיווקי. אין כלי אנליטיקה של צד שלישי.</p>
+
+<h2>3א. נתונים מ-Google ושימוש מוגבל (Limited Use)</h2>
+<p>השימוש של המערכת במידע שמתקבל מ-Google APIs ובהעברתו לכל יעד אחר עומד בדרישות <a href="https://developers.google.com/terms/api-services-user-data-policy">מדיניות נתוני המשתמש של שירותי Google API</a>, כולל דרישות ה-Limited Use. המידע משמש אך ורק להפעלת התכונות הגלויות למשתמש במערכת. הוא אינו נמכר, אינו משמש לפרסום, אינו מועבר לצד שלישי, ואינו משמש לאימון מודלי בינה מלאכותית. אין אדם מטעם מפעיל האתר שקורא את המידע.</p>
+
+<h2>4. הרשאות Google: מה מבקשים ולמה</h2>
+<table>
+<tr><th>מי</th><th>מתי</th><th>הרשאה</th><th>למה</th></tr>
+<tr><td>מורה ותלמיד</td><td>כניסה לאתר</td><td>זיהוי בסיסי (openid, דוא"ל, שם)</td><td>לזהות מי נכנס ולהתאים לרשימת המורה</td></tr>
+<tr><td>מורה</td><td>הקמה חד-פעמית בדף ההצטרפות</td><td>ניהול פרויקטי Apps Script ופריסתם; יצירת פרויקט Google Cloud אישי; דוא"ל</td><td>ליצור את שרת המורה בחשבונו, לפרוס אותו ולהפעיל את שירות העדכונים בפרויקט האישי שלו. ההרשאות נשארות בדפדפן המורה בזמן ההקמה בלבד, ואינן נשמרות או נשלחות לאיש</td></tr>
+<tr><td>המורה (בעל השרת)</td><td>אישור חד-פעמי של השרת האישי</td><td>Google Drive; פנייה לשירותים חיצוניים; הרצה מתוזמנת; עדכון קוד הפרויקט; דוא"ל</td><td>שמירת הקבצים והנתונים בתיקיית המערכת, בדיקה והתקנת עדכונים חתומים, אימות זהות מול Google</td></tr>
+</table>
+<p>ההרשאות ניתנות על ידי המורה לשרת <strong>שבבעלותו</strong>. מפעיל האתר אינו מקבל גישה ל-Drive של המורה, ואין בידיו מפתח או אסימון שמאפשרים זאת.</p>
+
+<h2>5. מי יכול לגשת למידע</h2>
+<ul>
+<li><strong>המורה</strong> לכל נתוני המערכת שלו. <strong>התלמיד</strong> רק לנתונים שלו ולמה שהמורה בחר להציג לו. תלמידים אינם רואים נתונים אישיים של תלמידים אחרים.</li>
+<li><strong>מפעיל האתר:</strong> אין גישה לנתוני מורים ותלמידים. הוא מפרסם גרסאות חתומות של הקוד בלבד.</li>
+<li><strong>Google</strong> מספקת את תשתית האחסון וההרצה לפי מדיניות הפרטיות והתנאים שלה, החלים על חשבון המורה. <strong>GitHub</strong> מארחת את קבצי האתר הסטטיים ומקבלת, כמו כל אתר, כתובות IP ופרטי דפדפן בעת טעינת האתר, לפי מדיניותה.</li>
+</ul>
+
+<h2>6. תלמידים קטינים</h2>
+<ol>
+<li>הכללת תלמיד במערכת נעשית על ידי המורה במסגרת תפקידו החינוכי.</li>
+<li><strong>באחריות המורה</strong> לוודא שיש לו הסמכות וההרשאות הנדרשות מבית הספר ו/או מהורי התלמידים להשתמש בכלי ובאחסון Google, בהתאם לנהלי בית הספר, להנחיות משרד החינוך ולחוק הגנת הפרטיות.</li>
+<li>מומלץ ליידע הורים ותלמידים מראש שנעשה שימוש במערכת, מה נשמר ואצל מי.</li>
+<li>מפעיל האתר אינו פונה לתלמידים ואינו יוצר איתם קשר.</li>
+</ol>
+
+<h2>7. אבטחת מידע</h2>
+<ul>
+<li>הנתונים נשמרים בתשתית Google ומוגנים באבטחת חשבון Google של המורה. מומלץ מאוד להפעיל אימות דו-שלבי.</li>
+<li>עדכון מותקן רק אם הוא חתום דיגיטלית (Ed25519) על ידי מפעיל האתר ועובר בדיקת שלמות. עדכון לא חתום או ששונה נדחה.</li>
+<li>אם גרסה חדשה אינה פועלת, השרת חוזר אוטומטית לגרסה הקודמת, בלי פגיעה בנתונים.</li>
+<li>לפני כניסת תלמיד, האתר מאמת מול Google ומציג לתלמיד את חשבון Google של בעל השרת, כדי להגן מפני שרת מתחזה.</li>
+<li>אין מערכת חסינה לחלוטין. באחריות המורה לא לשתף קישורי גישה ולא להעניק לאחרים גישה לחשבונו.</li>
+<li>אם יתגלה פגם שעלול לחשוף מידע, יופץ עדכון מתקן ותפורסם הודעה באתר.</li>
+</ul>
+
+<h2>8. מה מפעיל האתר כן מקבל</h2>
+<p>פניות שתשלחו אליו מרצונכם בדוא"ל (שם, כתובת, תוכן הפנייה) ישמשו למענה בלבד וימחקו לפי בקשה.</p>
+
+<h2>9. שמירה ומחיקה</h2>
+<ul>
+<li>המורה שולט בנתונים: אפשר לערוך, לייצא (גיבוי) ולמחוק אותם.</li>
+<li><strong>מחיקת כל המערכת:</strong> המורה מוחק את תיקיית הנתונים ב-Drive, את פרויקט ה-Apps Script שלו ב-script.google.com ואת פרויקט ה-Cloud האישי שלו.</li>
+<li>הרשאות ששימשו להקמה אפשר לבטל ב-<a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
+<li>בקשת תלמיד או הורה לעיין, לתקן או למחוק מידע מופנית <strong>למורה</strong>, בעל המידע.</li>
+</ul>
+
+<h2>10. שינויים</h2>
+<p>שינוי מהותי יפורסם באתר לפני כניסתו לתוקף, עם תאריך עדכון חדש.</p>
+
+<h2>11. יצירת קשר</h2>
+<p><a href="mailto:uribyology@gmail.com">uribyology@gmail.com</a></p>
+
+<div class="en" lang="en" dir="ltr">
+<h2>Privacy Policy (English summary)</h2>
+<p><strong>Student-and-teacher project guidance system for Israeli high-school thesis projects.</strong> Operator: אורי העליון. Contact: <a href="mailto:uribyology@gmail.com">uribyology@gmail.com</a>. Last updated: 2026-11-02.</p>
+<p><strong>What the app does.</strong> The site is a static web app. Each teacher sets up their own private copy of the server code in their own Google account (Google Apps Script). All data (students, tasks, submissions, feedback, grades) is stored only in that teacher's Google Drive. The operator has no database and cannot access teacher or student data.</p>
+<p><strong>Google user data.</strong> Sign-in uses basic profile identifiers (openid, email, name) to match users to the teacher's roster. During the one-time teacher setup, the setup page (running in the teacher's browser) uses the Apps Script API and Cloud Resource Manager/Service Usage APIs, with the teacher's explicit consent, solely to create and deploy the teacher's own Apps Script project and personal Cloud project. Those access tokens stay in browser memory, are not stored, and are not sent to the operator or any third party. The teacher's own server later asks the teacher for Drive access to store its data in the teacher's own Drive, and for permission to install signed updates.</p>
+<p><strong>Limited Use.</strong> The app's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements. Data is used only to provide user-facing features; it is not sold, not used for advertising, not shared with third parties, not used to train AI models, and not read by humans at the operator.</p>
+<p><strong>Retention and deletion.</strong> Data lives in the teacher's account and is controlled by the teacher. Deleting the Drive folder and the Apps Script and Cloud projects removes everything. Access can be revoked at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</p>
+</div>
+</body>
+</html>
