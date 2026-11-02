@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הצטרפות למערכת ליווי פרויקט גמר</title>
+<style>
+  :root { --bg: #f6f7f9; --card: #fff; --ink: #1c2430; --muted: #5b6676; --line: #d9dee5; --brand: #2557a7; --ok: #1a7f37; --warn: #8a5a00; --warnbg: #fff4d6; --err: #b42318; --errbg: #fde8e6; --okbg: #e3f5e8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: system-ui, "Segoe UI", Arial, sans-serif; line-height: 1.7; font-size: 17px; }
+  header, main, footer { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  header { padding-top: 28px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  h2 { font-size: 1.25rem; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin: 0 0 16px; }
+  .banner { background: var(--warnbg); border: 1px solid #e0b84a; border-radius: 8px; padding: 8px 14px; margin: 12px 0; font-size: .95rem; }
+  ol.stepper { list-style: none; display: flex; gap: 6px; padding: 0; margin: 14px 0; flex-wrap: wrap; }
+  ol.stepper li { flex: 1 1 90px; text-align: center; font-size: .85rem; color: var(--muted); border-top: 4px solid var(--line); padding-top: 6px; }
+  ol.stepper li.done { border-color: var(--ok); color: var(--ok); }
+  ol.stepper li.now { border-color: var(--brand); color: var(--brand); font-weight: 700; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin: 14px 0; }
+  section[hidden] { display: none; }
+  button, .btn { font: inherit; background: var(--brand); color: #fff; border: 0; border-radius: 8px; padding: 11px 22px; cursor: pointer; text-decoration: none; display: inline-block; margin: 6px 0 6px 8px; }
+  button.secondary, .btn.secondary { background: #fff; color: var(--brand); border: 1px solid var(--brand); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #f2a900; outline-offset: 2px; }
+  ul.checks { padding-inline-start: 22px; } ul.checks li { margin: 6px 0; }
+  .note { background: var(--warnbg); border: 1px solid #e0b84a; border-radius: 8px; padding: 10px 14px; margin: 12px 0; }
+  .good { background: var(--okbg); border: 1px solid #8fcf9f; border-radius: 8px; padding: 10px 14px; margin: 12px 0; }
+  .bad { background: var(--errbg); border: 1px solid #e59a93; border-radius: 8px; padding: 10px 14px; margin: 12px 0; }
+  .bad h3 { margin: 0 0 4px; color: var(--err); font-size: 1.05rem; }
+  ol.guide { padding-inline-start: 24px; } ol.guide li { margin: 10px 0; }
+  .en { direction: ltr; unicode-bidi: embed; background: #eef1f5; border-radius: 4px; padding: 0 6px; font-family: system-ui, Arial, sans-serif; }
+  ul.progress { list-style: none; padding: 0; margin: 8px 0; } ul.progress li { padding: 5px 0; color: var(--muted); }
+  ul.progress li::before { content: "○ "; } ul.progress li.run { color: var(--ink); font-weight: 600; } ul.progress li.run::before { content: "◔ "; color: var(--brand); }
+  ul.progress li.ok { color: var(--ink); } ul.progress li.ok::before { content: "✓ "; color: var(--ok); } ul.progress li.fail { color: var(--err); } ul.progress li.fail::before { content: "✕ "; }
+  .linkbox { direction: ltr; text-align: left; word-break: break-all; background: #eef1f5; border-radius: 8px; padding: 10px 12px; font-family: ui-monospace, Consolas, monospace; font-size: .92rem; }
+  details { margin: 16px 0; } summary { cursor: pointer; color: var(--brand); }
+  input[type=text] { font: inherit; width: 100%; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; direction: ltr; }
+  label.chk { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; cursor: pointer; }
+  label.chk input { margin-top: 8px; width: 18px; height: 18px; }
+  footer { padding: 8px 16px 40px; color: var(--muted); font-size: .85rem; }
+  @media (max-width: 520px) { body { font-size: 16px; } section { padding: 14px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>הצטרפות למערכת ליווי פרויקט גמר</h1>
+  <p class="sub">כ-5 דקות. בלי לכתוב קוד ובלי לפתוח עורך. במהלך ההצטרפות Google תציג כמה מסכי אישור, והמדריך כאן מסביר כל אחד.</p>
+  <div id="testBanner" class="banner" hidden>גרסת בדיקה: ההצטרפות מתבצעת בפרויקט הניסוי של אורי, ולא במערכת האמיתית.</div>
+  <ol class="stepper" id="stepper" aria-label="שלבי ההצטרפות">
+    <li data-i="1">הכנה</li><li data-i="2">הפעלת שירות</li><li data-i="3">התחברות</li><li data-i="4">הקמה</li><li data-i="5">אישור הרשאות</li><li data-i="6">סיום</li>
+  </ol>
+</header>
+
+<main>
+  <section id="s1">
+    <h2>לפני שמתחילים</h2>
+    <p>המערכת תוקם <strong>בחשבון Google שלכם</strong>. כל נתוני המחזור, הציונים וההגשות יישמרו בתיקייה פרטית ב-Google Drive שלכם. אין שרת מרכזי שמחזיק את המידע.</p>
+    <p>מה צריך:</p>
+    <ul class="checks">
+      <li>חשבון Google אישי (Gmail) שאתם מחוברים אליו בדפדפן הזה. מומלץ להשתמש בחשבון פרטי ולא בחשבון של בית הספר, כי ארגונים לעיתים חוסמים את ההקמה.</li>
+      <li>חיבור יציב לאינטרנט ו-5 דקות רצופות.</li>
+      <li>לא צריך אמצעי תשלום. ההקמה חינמית.</li>
+    </ul>
+    <div class="note"><strong>חשוב לדעת מראש:</strong> Google תציג אזהרה אדומה "האפליקציה לא אומתה". זה צפוי, כי המערכת נוצרת בחשבון שלכם. ההוראות בהמשך מראות בדיוק על מה ללחוץ.</div>
+    <label class="chk"><input type="checkbox" id="ack"><span>קראתי והבנתי, ואני רוצה להקים את המערכת בחשבון Google שלי.</span></label>
+    <button id="go1" disabled>מתחילים</button>
+  </section>
+
+  <section id="s2" hidden>
+    <h2>שלב קטן אחד בהגדרות Google</h2>
+    <p>כדי שההקמה תעבוד, צריך שהמתג "Google Apps Script API" יהיה דלוק בחשבון שלכם.</p>
+    <ol class="guide">
+      <li>לחצו על הכפתור כדי לפתוח את ההגדרות (ייפתח בלשונית חדשה).</li>
+      <li>אם המתג <span class="en">Google Apps Script API</span> כבוי, הדליקו אותו. אם הוא כבר דלוק, אין צורך לעשות דבר.</li>
+      <li>חזרו ללשונית הזאת ולחצו "הדלקתי".</li>
+    </ol>
+    <a class="btn secondary" id="openSettings" href="https://script.google.com/home/usersettings" target="_blank" rel="noopener">פתיחת ההגדרות</a>
+    <button id="go2">הדלקתי (או שהוא כבר היה דלוק)</button>
+  </section>
+
+  <section id="s3" hidden>
+    <h2>התחברות עם Google</h2>
+    <p>לחצו על הכפתור ובחרו את חשבון Google שבו תרצו להקים את המערכת. יופיע חלון עם בקשת הרשאות.</p>
+    <div class="note"><strong>סמנו את כל התיבות</strong> בחלון ההרשאות. אם לא תסמנו הכול, ההקמה תיכשל ותצטרכו להתחיל את השלב הזה מחדש.</div>
+    <p class="sub">ההרשאות האלה משמשות רק להקמה חד-פעמית (יצירת הסקריפט והפרויקט האישי שלכם). המשגר אינו שומר אותן ואינו שולח אותן לאף מקום.</p>
+    <button id="login">התחברות עם Google</button>
+    <div id="loginMsg" class="bad" hidden></div>
+  </section>
+
+  <section id="s4" hidden>
+    <h2>ההקמה מתבצעת</h2>
+    <p>זה לוקח בערך חצי דקה. אל תסגרו את הלשונית.</p>
+    <ul class="progress" id="progress" aria-live="polite"></ul>
+    <div id="runError" class="bad" hidden>
+      <h3 id="errTitle"></h3><p id="errText"></p>
+      <a class="btn secondary" id="errLink" href="#" target="_blank" rel="noopener" hidden></a>
+      <button id="retry">נסו שוב</button>
+    </div>
+  </section>
+
+  <section id="s5" hidden>
+    <h2>אישור ההרשאות של המערכת שלכם (פעם אחת)</h2>
+    <p>המערכת נוצרה, ועכשיו Google צריכה שתאשרו לה לעבוד. זה השלב עם האזהרות, והוא בטוח: המערכת נוצרה על ידכם, בחשבון שלכם.</p>
+    <p>לחצו על "פתיחת המערכת", ואז לפי הסדר:</p>
+    <ol class="guide">
+      <li>יופיע מסך באנגלית עם הכותרת <span class="en">needs your permission</span>. לחצו <span class="en">REVIEW PERMISSIONS</span>.</li>
+      <li>בחרו את החשבון שלכם.</li>
+      <li>תופיע אזהרה אדומה "Google לא אימתה את האפליקציה הזו". <strong>הכפתור הכחול הבולט מחזיר אחורה, אל תלחצו עליו.</strong> לחצו על הקישור הקטן <strong>"מתקדם"</strong> (בצד שמאל למטה), ואז על "מעבר אל ... (לא בטוח)".</li>
+      <li>סמנו <strong>"בחירת הכול"</strong> ולחצו "המשך". תראו בקשה לצפות ולערוך קבצים ב-Drive: המערכת משתמשת רק בתיקייה שהיא יוצרת בעצמה.</li>
+      <li>בסוף תראו שורה של טקסט (בלי עיצוב). זה תקין. סגרו את הלשונית וחזרו לכאן.</li>
+    </ol>
+    <a class="btn" id="openApp" href="#" target="_blank" rel="noopener">פתיחת המערכת</a>
+    <button id="authDone" class="secondary">אישרתי, בדקו</button>
+    <div id="authMsg" class="note" hidden></div>
+  </section>
+
+  <section id="s6" hidden>
+    <div id="s6init">
+      <h2>הקמת תיקיית הנתונים</h2>
+      <p>עוד צעד אחד: יצירת התיקייה הפרטית ב-Drive ומבנה הנתונים ההתחלתי (ריק, בלי נתוני דמה).</p>
+      <a class="btn" id="openInit" href="#" target="_blank" rel="noopener">הקמת תיקיית הנתונים</a>
+      <button id="initDone" class="secondary">ראיתי "ההקמה הושלמה", בדקו</button>
+      <div id="initMsg" class="note" hidden></div>
+    </div>
+    <div id="s6done" hidden>
+      <h2>המערכת שלכם מוכנה</h2>
+      <div class="good">ההקמה הושלמה. הנתונים נשמרים בתיקייה "מערכת ליווי פרויקט גמר" ב-Drive שלכם.</div>
+      <p><strong>הקישור שלכם</strong> (למורה ולתלמידים):</p>
+      <div class="linkbox" id="appLink"></div>
+      <button id="copy">העתקת הקישור</button> <a class="btn secondary" id="openMine" href="#" target="_blank" rel="noopener">פתיחה והתחברות כמורה</a>
+      <ol class="guide">
+        <li><strong>שמרו את הקישור</strong> (למשל בסימנייה). הוא הכתובת של המערכת שלכם.</li>
+        <li>היכנסו אליו עם אותו חשבון Google שהקמתם איתו: תיכנסו כמורה.</li>
+        <li>את אותו קישור תשלחו לתלמידים. הם נכנסים אליו עם החשבון שרשמתם להם.</li>
+        <li>עדכוני גרסה מגיעים אליכם אוטומטית, בהדרגה, בלי שתצטרכו לעשות דבר.</li>
+      </ol>
+    </div>
+  </section>
+
+  <details id="restore">
+    <summary>כבר התחלתי בעבר ואיבדתי את ההתקדמות</summary>
+    <p>אם יש לכם את כתובת השרת (נראית כך: <span class="en">https://script.google.com/macros/s/.../exec</span>), הדביקו אותה כאן והמשגר ימשיך משם.</p>
+    <input type="text" id="restoreUrl" placeholder="https://script.google.com/macros/s/.../exec" aria-label="כתובת השרת">
+    <button id="restoreBtn" class="secondary">המשך משם</button>
+    <div id="restoreMsg" class="bad" hidden></div>
+  </details>
+</main>
+
+<footer>פותח על ידי אורי העליון. שאלות או תקלות: פנו לאורי ושלחו את הטקסט שמופיע ב"פירוט טכני" אם הופיע.</footer>
+
+<script src="product-config.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script type="module" src="ui.js"></script>
+</body>
+</html>

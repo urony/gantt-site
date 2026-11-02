@@ -1,0 +1,13 @@
+[
+ {
+  "at": "2026-11-02T20:21:49.238Z",
+  "seq": 1,
+  "version": 1,
+  "percent": 100,
+  "urgent": false,
+  "hold": false,
+  "pkg": "pkg-1.json",
+  "sha256": "9e06dff13b78fa77caaff60fa7afc84509948c89d56d8895337e8f98dd265476",
+  "prevVersion": null
+ }
+]
