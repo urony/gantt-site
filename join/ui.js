@@ -101,7 +101,8 @@ async function startRun() {
   if (r.ok) { render(); return; }
   $('runError').hidden = false;
   $('errTitle').textContent = r.error.title;
-  $('errText').textContent = r.error.text + (r.error.kind === 'unknown' ? '' : '');
+  // פירוט טכני תמיד מוצג (קטוע), כדי שמורה יוכל לשלוח אותו לאורי; הטקסט מגיע מ-Google ואינו מכיל אסימונים
+  $('errText').textContent = r.error.text + (r.raw ? ' פירוט טכני: ' + String(r.raw).slice(0, 300) : '');
   const l = LINKS[r.error.kind]; $('errLink').hidden = !l;
   if (l) { $('errLink').textContent = l[0]; $('errLink').href = l[1]; }
   if (r.error.kind === 'auth') token = null;
