@@ -9,5 +9,16 @@
   "pkg": "pkg-1.json",
   "sha256": "9e06dff13b78fa77caaff60fa7afc84509948c89d56d8895337e8f98dd265476",
   "prevVersion": null
+ },
+ {
+  "at": "2026-11-04T15:41:10.482Z",
+  "seq": 2,
+  "version": 2,
+  "percent": 5,
+  "urgent": false,
+  "hold": false,
+  "pkg": "pkg-2.json",
+  "sha256": "875b4a0dedd3abf541ee0c929c063461567f100e5427ed405eaae607ac919be4",
+  "prevVersion": 1
  }
 ]

@@ -484,3 +484,23 @@ details.more .menu .btn { text-align: start; width: 100%; }
 .adm-list li.overdue { border-color: var(--bad); }
 .adm-list .adm-t { flex: 1 1 220px; }
 .adm-note { font-size: .85rem; }
+
+/* ייבוא חופשות משרד החינוך */
+.moe-card { margin-bottom: 14px; }
+.moe-card h2 { margin-top: 0; }
+.moe-grp { border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; padding: 6px 12px 8px; }
+.moe-grp legend { font-weight: 600; padding: 0 6px; }
+.moe-row { display: block; padding: 4px 0; }
+
+/* קישור למדריך המורה במסך הבית */
+.guide-banner { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; padding: 12px 18px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--brand) 30%, var(--line)); background: color-mix(in srgb, var(--brand) 9%, var(--card)); color: var(--text); text-decoration: none; }
+.guide-banner:hover { background: color-mix(in srgb, var(--brand) 15%, var(--card)); }
+.guide-banner .gb-ico { font-size: 1.8rem; line-height: 1; }
+.guide-banner .gb-txt { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.guide-banner .gb-txt b { font-size: 1.05rem; color: var(--brand-dark); }
+.guide-banner .gb-txt span { color: var(--muted); font-size: .9rem; }
+.guide-banner .gb-go { font-weight: 600; color: var(--brand-dark); white-space: nowrap; }
+@media (max-width: 640px) { .guide-banner .gb-go { display: none; } }
+
+.moe-row .wbadge{white-space:nowrap;border-radius:8px;margin-inline-start:.4em}
+.moe-links{flex-wrap:wrap}

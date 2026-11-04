@@ -7,6 +7,7 @@
 import * as L from './logic.js';
 import * as T from './tasks.js';
 import * as AE from './admin-events.js';
+import * as MV from './moe-vacations.js';
 import * as C from './cycles.js';
 import * as S from './submissions.js';
 import * as R from './review.js';
@@ -309,6 +310,9 @@ const api = {
   removeException: act(T.removeException),
   addVacation: act(T.addVacation),
   deleteVacation: act(T.deleteVacation),
+  updateVacation: act(MV.updateVacation),
+  importVacations: act(MV.importVacations),
+  setCycleSchool: act(MV.setSchool),
   addDefaultAdminEvents: act((s) => AE.addDefaultAdminEvents(s)),
   updateAdminEvent: act(AE.updateAdminEvent),
   deleteAdminEvent: act(AE.deleteAdminEvent),

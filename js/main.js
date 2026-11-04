@@ -5,6 +5,10 @@ import { uploadFile, downloadFile } from './file-client.js';
 import * as L from './logic.js';
 import * as T from './tasks.js';
 import * as AE from './admin-events.js';
+import * as MV from './moe-vacations.js';
+import { loadCatalog } from './moe-catalog.js';
+import { resolveGuideUrl } from './guide-link.js';
+import { serverSupports, outdatedServerMessage, SERVER_OUTDATED_MESSAGE } from './version.js';
 import * as S from './submissions.js';
 import * as R from './review.js';
 import * as F from './feedback.js';
@@ -160,7 +164,7 @@ async function run(fn, okMsg) {
     return true;
   } catch (e) {
     if (e && (e.code === 'unauthenticated' || e.code === 'access_ended')) { sessionLost(e.message); return false; }
-    toast(e.message || 'הפעולה נכשלה', true);
+    toast(outdatedServerMessage(e) || e.message || 'הפעולה נכשלה', true);
     return false;
   }
 }
@@ -366,12 +370,14 @@ function newCycleDialog() {
 // הסדר משקף את תהליך העבודה: התלמיד מגיש, המורה בודק ונותן משוב וציון, ואז מחליט מה לפרסם.
 // "הגשות ובדיקה" הוא מסך אחד לתהליך: רשימת ההגשות, ומשם פתיחה ישירה למסך הבדיקה (גם route=review שייך לו).
 const NAV_KEY = 'gantt-nav-open-v1';
-const NAV_ICONS = { home: '🏠', notifications: '🔔', notes: '📝', cycle: '📅', gantt: '📊', calendar: '🗓️', tasks: '✅', template: '🧱', vacations: '🏖️', students: '👥', groups: '🧩', submissions: '📥', grades: '🎯', rubrics: '📐', backup: '💾' };
+const guideUrl = () => resolveGuideUrl(config, typeof location !== 'undefined' ? location.href : '');
+const NAV_ICONS = { guide: '📖', home: '🏠', notifications: '🔔', notes: '📝', cycle: '📅', gantt: '📊', calendar: '🗓️', tasks: '✅', template: '🧱', vacations: '🏖️', students: '👥', groups: '🧩', submissions: '📥', grades: '🎯', rubrics: '📐', backup: '💾' };
 const navGroups = () => [
   { id: 'main', title: 'ראשי ומעקב', items: [
     { id: 'home', label: 'בית' },
     { id: 'notifications', label: 'התראות', badge: N.notifCounts(state).unread, badgeLabel: 'לא נקראו' },
     { id: 'notes', label: 'פנקס Notes', badge: NB.todoCount(vs().notesBook), badgeLabel: 'Notes שדורשים טיפול', soft: true },
+    { id: 'guide', label: 'מדריך למורה', external: true },
   ] },
   { id: 'plan', title: 'תכנון וניהול', items: [
     { id: 'cycle', label: 'מחזור' },
@@ -410,6 +416,11 @@ function navHtml(r) {
     const items = g.items.map((i) => {
       const act = i.id === r || (i.also || []).includes(r);
       const badge = i.badge ? ` <span class="nbadge${i.soft ? ' nb-soft' : ''}" title="${esc(i.badgeLabel)}" aria-label="${i.badge} ${esc(i.badgeLabel)}">${i.badge}</span>` : '';
+      if (i.external) {
+        const url = guideUrl();
+        if (!url) return '';
+        return `<a href="${esc(url)}" target="_blank" rel="noopener" title="נפתח בלשונית חדשה"><span class="nav-icon" aria-hidden="true">${NAV_ICONS[i.id] || ''}</span><span class="nav-label">${esc(i.label)}</span> <span class="muted" aria-hidden="true">↗</span></a>`;
+      }
       return `<a href="#/${i.id}" class="${act ? 'active' : ''}" ${act ? 'aria-current="page"' : ''}><span class="nav-icon" aria-hidden="true">${NAV_ICONS[i.id] || ''}</span><span class="nav-label">${esc(i.label)}</span>${badge}</a>`;
     }).join('');
     return `<div class="nav-group ${activeIn ? 'has-active' : ''}">
@@ -484,6 +495,7 @@ function viewHome() {
     </div>`;
   return shell(esc(state.cycle ? state.cycle.name : 'מחזור'), `
     <div class="credit">פותח על ידי אורי העליון</div>
+    ${guideUrl() ? `<a class="guide-banner" href="${esc(guideUrl())}" target="_blank" rel="noopener"><span class="gb-ico" aria-hidden="true">📖</span><span class="gb-txt"><b>מדריך למורה</b><span>הסבר מלא על המסכים והתהליכים: מהגשה ועד פרסום הציון</span></span><span class="gb-go">פתיחה בלשונית חדשה ↗</span></a>` : ''}
     <div class="grid-stats">
       <a class="stat" href="#/students" data-ui="filter=active" title="לרשימת התלמידים"><div class="n">${st.active}</div>תלמידים פעילים</a>
       <a class="stat" href="#/groups" title="לקבוצות"><div class="n">${st.groups}</div>קבוצות</a>
@@ -530,7 +542,7 @@ function viewGantt() {
 
 // מחזור בארכיון הוא לקריאה בלבד: מסירים כפתורי עריכה ומנטרלים שדות, במקום להציג פעולות שמובילות לשגיאה.
 // עריכת הבנק המשותף (tpl-*) אינה נוגעת בנתוני המחזור ולכן נשארת.
-const WRITE_ACTIONS = new Set(['notif-read', 'notif-unread', 'notif-read-all', 'notif-resolve', 'notif-reopen', 'rem-run', 'rem-task-edit', 'pub-grade', 'retract-grade', 'retract-fb', 'rv-retract', 'gr-pub-overall', 'gr-retract-overall', 'gr-pub-overall-all', 'gr-pub-task', 'gr-retract-task', 'gr-group-grade', 'gr-scheme-edit', 'gr-tpl-apply', 'gr-exclude', 'gr-weights', 'gr-include', 'gr-pw-clear', 'sc-setgrade', 'rb-task-edit', 'rb-task-remove', 'ai-toggle', 'ai-quarantine', 'ai-scan', 'ai-run', 'ai-anchor', 'ai-general', 'ai-approve', 'ai-reject', 'rv-return', 'rv-reopen', 'rv-due-save', 'reopen-fix', 'rv-check', 'rv-note-save', 'rv-send', 'rv-reply', 'rv-answer', 'fb-batch', 'rv-add', 'rv-edit', 'rv-save', 'rv-del', 'sub-retry', 'sub-request-pdf', 'task-up', 'task-down', 'deactivate', 'reactivate', 'del-task', 'save-task', 'add-exc', 'rm-exc', 'review', 'bank-add', 'bank-reactivate', 'apply-template', 'add-task', 'add-vac', 'del-vac', 'adm-done', 'adm-add-defaults', 'adm-del', 'edit-student', 'toggle-active', 'add-student', 'edit-group', 'delete-group', 'remove-member', 'add-group', 'shift-class', 'add-link', 'rm-link']);
+const WRITE_ACTIONS = new Set(['notif-read', 'notif-unread', 'notif-read-all', 'notif-resolve', 'notif-reopen', 'rem-run', 'rem-task-edit', 'pub-grade', 'retract-grade', 'retract-fb', 'rv-retract', 'gr-pub-overall', 'gr-retract-overall', 'gr-pub-overall-all', 'gr-pub-task', 'gr-retract-task', 'gr-group-grade', 'gr-scheme-edit', 'gr-tpl-apply', 'gr-exclude', 'gr-weights', 'gr-include', 'gr-pw-clear', 'sc-setgrade', 'rb-task-edit', 'rb-task-remove', 'ai-toggle', 'ai-quarantine', 'ai-scan', 'ai-run', 'ai-anchor', 'ai-general', 'ai-approve', 'ai-reject', 'rv-return', 'rv-reopen', 'rv-due-save', 'reopen-fix', 'rv-check', 'rv-note-save', 'rv-send', 'rv-reply', 'rv-answer', 'fb-batch', 'rv-add', 'rv-edit', 'rv-save', 'rv-del', 'sub-retry', 'sub-request-pdf', 'task-up', 'task-down', 'deactivate', 'reactivate', 'del-task', 'save-task', 'add-exc', 'rm-exc', 'review', 'bank-add', 'bank-reactivate', 'apply-template', 'add-task', 'add-vac', 'del-vac', 'edit-vac', 'moe-pick', 'moe-school', 'adm-done', 'adm-add-defaults', 'adm-del', 'edit-student', 'toggle-active', 'add-student', 'edit-group', 'delete-group', 'remove-member', 'add-group', 'shift-class', 'add-link', 'rm-link']);
 function lockArchived(root) {
   if (!state || !state.archived || !session || session.role !== 'teacher') return;
   root.querySelectorAll('[data-action]').forEach((el) => {
@@ -725,13 +737,139 @@ function viewTemplate() {
 function viewVacations() {
   const rows = [...state.vacations].sort((a, b) => (a.start < b.start ? -1 : 1)).map((v) => {
     const hit = T.orderedTasks(state).filter((t) => t.start <= v.end && t.due >= v.start);
-    return `<tr><td>${esc(v.title)}</td><td>${fmtD(v.start)}</td><td>${fmtD(v.end)}</td><td>${hit.length ? `${hit.length} משימות חופפות` : '<span class="muted">—</span>'}</td>
-      <td><button class="btn small danger" data-action="del-vac" data-id="${esc(v.id)}">מחיקה</button></td></tr>`;
+    return `<tr><td>${esc(v.title)}${moeSrcLine(v)}</td><td>${fmtD(v.start)}</td><td>${fmtD(v.end)}</td><td>${hit.length ? `${hit.length} משימות חופפות` : '<span class="muted">—</span>'}</td>
+      <td><div class="row-actions"><button class="btn small" data-action="edit-vac" data-id="${esc(v.id)}">עריכה</button> <button class="btn small danger" data-action="del-vac" data-id="${esc(v.id)}">מחיקה</button></div></td></tr>`;
   }).join('');
+  const school = moeSchool();
   return shell('חופשות ואילוצים', `
+    <div class="card moe-card"><h2>🏛️ חופשות משרד החינוך</h2>
+      <p>המערכת מציעה את כל החגים, החופשות וימי הזיכרון הרשמיים של שנות הלימודים שבהן המחזור פועל (לפי תאריכי המחזור). <b>שום דבר לא נכנס מעצמו</b>: אתם בוחרים פריט־פריט, או מסמנים קבוצה שלמה בלחיצה (למשל כל חגי ישראל, או כל החגים המוסלמיים). אפשר לפתוח בכל שלב, וגם בכל שנה מחדש: מה שכבר קיים לא יוכפל, ושום חופשה שערכתם לא תשתנה. מועדי משימות והגשות לא משתנים, ואם חופשה חופפת משימה תופיע אזהרה כרגיל.</p>
+      <div class="toolbar"><button class="btn primary" data-action="moe-pick">🏛️ בחירת חופשות וחגים</button>
+        <span class="muted">סוג בית ספר (הגדרת המחזור): <b>${school ? esc(MV.SCHOOL_TYPES[school]) : 'עוד לא נבחר'}</b></span> <button class="btn small" data-action="moe-school">${school ? 'שינוי' : 'בחירה'}</button></div>
+      <p class="muted">המקור: חוזרי המנהל הכללי של משרד החינוך. לוח של שנת לימודים חדשה מתווסף בעדכון המערכת אחרי הפרסום הרשמי; עד אז תוצג הודעה ולא תאריכים משוערים.</p></div>
     <p class="muted">חופשות מסומנות בגאנט ובלוח השנה, ומשימות שחופפות אליהן מסומנות באזהרה. המערכת אינה מזיזה משימות אוטומטית.</p>
     ${rows ? `<div class="table-wrap"><table><thead><tr><th>שם</th><th>מתאריך</th><th>עד תאריך</th><th>השפעה</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>` : '<div class="empty">לא הוגדרו חופשות.</div>'}`,
-  '<button class="btn primary" data-action="add-vac">+ חופשה או אילוץ</button>');
+  '<button class="btn primary" data-action="moe-pick">🏛️ בחירת חופשות וחגים</button><button class="btn" data-action="add-vac">+ חופשה או אילוץ</button>');
+}
+
+// ---------- ייבוא חופשות משרד החינוך ----------
+// לחיצה אחת: המערכת מזהה את שנות הלימודים לפי תאריכי המחזור ומכניסה את החופשות הרשמיות (בלי כפילויות, בלי לגעת בעריכות).
+// הנתונים מובנים באתר (app/data/moe-vacations) ומתעדכנים בעדכון המערכת. סוג בית הספר נשמר בדפדפן.
+const MOE_SCHOOL_KEY = 'gantt-moe-school-v1';
+// סוג בית הספר הוא הגדרה של המחזור (state.cycle.school). הדפדפן זוכר רק את הבחירה האחרונה, כברירת מחדל למחזור חדש.
+const moeSchool = () => { const v = state && state.cycle && state.cycle.school; return MV.SCHOOL_TYPES[v] ? v : ''; };
+const moeLastSchool = () => { try { const v = localStorage.getItem(MOE_SCHOOL_KEY); return MV.SCHOOL_TYPES[v] ? v : ''; } catch (e) { return ''; } };
+const moeRemember = (v) => { try { localStorage.setItem(MOE_SCHOOL_KEY, v); } catch (e) { /* ברירת המחדל לא תישמר */ } };
+// שרת שעדיין לא עודכן אינו מכיר את הפעולות החדשות: הודעה ברורה במקום שגיאה טכנית (מנגנון גרסאות ה-API הקיים, version.js)
+function moeSupported() {
+  if (!remoteMode || serverSupports(typeof api.getServerApi === 'function' ? api.getServerApi() : null, 'moeVacations')) return true;
+  infoDialog('נדרש עדכון של המערכת', `<p>${esc(SERVER_OUTDATED_MESSAGE)}</p>`);
+  return false;
+}
+const moeUrlOk = (u) => /^https:\/\/(apps|pop)\.education\.gov\.il\//.test(String(u || ''));
+function moeSrcLine(v) {
+  if (!v.src) return '';
+  const link = moeUrlOk(v.src.url) ? ` · <a href="${esc(v.src.url)}" target="_blank" rel="noopener">חוזר ${esc(v.src.notice)}</a>` : '';
+  return `<div class="muted" style="font-size:.85em">🏛️ משרד החינוך · ${esc(v.src.yearLabel)} · ${esc(v.src.schoolLabel)}${v.src.edited ? ' · נערכה' : ''}${link}</div>`;
+}
+async function moeCatalog() {
+  if (!ui.moeCatalog) {
+    try { ui.moeCatalog = await loadCatalog(); } catch (e) { toast('טעינת לוחות משרד החינוך נכשלה. בדקו את החיבור ונסו שוב.', true); return null; }
+  }
+  return ui.moeCatalog;
+}
+function infoDialog(title, html) {
+  showDlg(`<div class="form"><h2>${esc(title)}</h2>${html}<div class="dlg-actions"><button class="btn primary" type="button" data-action="close-dlg">הבנתי</button></div></div>`);
+}
+function moeAskSchool(then) {
+  if (!moeSupported()) return;
+  const cur = moeSchool() || moeLastSchool() || 'jewish';
+  openDialog(`<h2>איזה סוג בית ספר?</h2><p class="muted">הלוח הרשמי שונה בין החינוך היהודי לערבי. הבחירה נשמרת כהגדרה של המחזור הזה, ואפשר לשנות אותה בכל עת.</p>
+    ${Object.entries(MV.SCHOOL_TYPES).map(([k, l]) => `<label class="chk"><input type="radio" name="school" value="${k}" ${k === cur ? 'checked' : ''}> ${esc(l)}</label>`).join('')}`,
+  (f) => { const next = fd(f).school; setTimeout(() => moeApplySchool(next, then), 0); return true; }, 'המשך');
+}
+// קובע את סוג בית הספר של המחזור. אם כבר יובאו חופשות מהלוח הקודם: הודעה ואפשרות להסיר אותן (רק מיובאות שלא נערכו), באישור המורה.
+async function moeApplySchool(next, then) {
+  const cur = moeSchool();
+  if (cur === next) { if (then) then(); return; }
+  const ch = MV.planSchoolChange(state, next);
+  const finish = async (removeOld) => {
+    if (!(await run(() => api.setCycleSchool(next, removeOld), removeOld ? 'סוג בית הספר הוחלף והחופשות שיובאו מהלוח הקודם הוסרו' : 'סוג בית הספר נשמר'))) return;
+    moeRemember(next);
+    if (then) then();
+  };
+  if (!cur || !ch.importedOther) { await finish(false); return; }
+  const oldLabel = MV.SCHOOL_TYPES[cur] || 'הקודם';
+  showDlg(`<div class="form"><h2>החלפת סוג בית ספר</h2>
+    <p>במחזור הזה יש <b>${ch.importedOther}</b> חופשות שיובאו מלוח ${esc(oldLabel)}. אפשר להסיר אותן עכשיו, כדי שלא יישארו חופשות של הלוח הקודם.</p>
+    <ul class="plain"><li><b>יוסרו:</b> ${ch.removable} חופשות שיובאו מהלוח הקודם ולא נערכו על ידך.</li>
+      <li><b>לא יוסרו:</b> חופשות שהוספת בעצמך${ch.keptEdited ? `, ו${ch.keptEdited === 1 ? 'חופשה מיובאת אחת שערכת' : `-${ch.keptEdited} חופשות מיובאות שערכת`}` : ''}.</li>
+      <li>מועדי משימות והגשות לא ישתנו.</li></ul>
+    <div class="dlg-actions">${ch.removable ? `<button class="btn primary" type="button" data-moe-sc="remove">החלף והסר ${ch.removable} חופשות</button>` : ''}<button class="btn ${ch.removable ? '' : 'primary'}" type="button" data-moe-sc="keep">החלף ושמור את כל החופשות</button><button class="btn" type="button" data-moe-sc="cancel">ביטול</button></div></div>`);
+  $dlg.querySelectorAll('[data-moe-sc]').forEach((b) => b.addEventListener('click', async () => {
+    const mode = b.dataset.moeSc;
+    closeDlg();
+    if (mode !== 'cancel') await finish(mode === 'remove');
+  }));
+}
+const moeMessages = (plan) => plan.years.filter((y) => !y.ok).map((y) => `<div class="alert"><b>${esc(y.label)}:</b> ${esc(y.message)}</div>`).join('');
+async function moePick() {
+  if (!moeSupported()) return;
+  const school = moeSchool();
+  if (!school) { moeAskSchool(moePick); return; }
+  const cat = await moeCatalog();
+  if (!cat) return;
+  const plan = MV.quickImportPlan(state, cat, school, state.cycle, T.D.today());
+  const okYears = plan.years.filter((y) => y.ok);
+  if (!okYears.length) { infoDialog('חופשות משרד החינוך', moeMessages(plan)); return; }
+  const gid = (y, k) => y.id + '|' + k;
+  const rowHtml = (y, r) => `<label class="chk moe-row ${r.status !== 'new' ? 'muted' : ''}"><input type="checkbox" data-moe-key="${esc(r.key)}" data-moe-grp="${esc(gid(y, r.group))}" ${r.status === 'exists' ? 'disabled' : ''}>
+      <b>${esc(r.title)}</b> <span class="muted">${fmtD(r.start)}${r.end !== r.start ? ' עד ' + fmtD(r.end) : ''}</span>
+      ${r.studyDay ? '<span class="wbadge st-pending">יום לימודים, לא חופשה</span>' : ''}${r.status === 'exists' ? '<span class="wbadge st-active">כבר קיימת</span>' : ''}${r.status === 'similar' ? '<span class="wbadge st-pending">קיימת חופשה בתאריכים זהים</span>' : ''}
+      ${r.note ? `<div class="muted" style="font-size:.85em">${esc(r.note)}</div>` : ''}</label>`;
+  const groupsOf = (y) => { const g = new Map(); for (const r of y.rows) { if (!g.has(r.group)) g.set(r.group, []); g.get(r.group).push(r); } return g; };
+  const section = (y) => {
+    const groups = groupsOf(y);
+    const links = [...groups.keys()].map((k) => `<button type="button" class="btn small" data-moe-grp-sel="${esc(gid(y, k))}">סמן: ${esc(k)}</button>`).join(' ');
+    return `<h3>${esc(y.label)}</h3><div class="toolbar moe-links">${links}</div>${[...groups].map(([k, rows]) => `<fieldset class="moe-grp"><legend>${esc(k)} <a href="#" class="muted" data-moe-grp-all="${esc(gid(y, k))}">סמן את כולם</a> · <a href="#" class="muted" data-moe-grp-none="${esc(gid(y, k))}">בטל</a></legend>${rows.map((r) => rowHtml(y, r)).join('')}</fieldset>`).join('')}`;
+  };
+  const omitted = okYears.flatMap((y) => ((y.calendar.omitted || []).filter((o) => o.school === school).map((o) => o.title + (o.community ? ' (' + o.community + ')' : ''))));
+  const omittedHtml = omitted.length ? `<div class="alert"><b>מועדים שהמשרד טרם פרסם להם תאריך ולכן אינם ברשימה:</b> ${esc([...new Set(omitted)].join(', '))}. לא הוזנו תאריכים משוערים, והם יתווספו בעדכון אחרי הפרסום הרשמי.</div>` : '';
+  openDialog(`<h2>חופשות וחגים של משרד החינוך</h2>
+    <p class="muted">${esc(MV.SCHOOL_TYPES[school])}. כלום לא מסומן מראש. סמנו פריטים, או לחצו על שם קבוצה כדי לסמן אותה כולה. ימי לימוד עם אירוע (למשל ימי זיכרון) אינם חופשה: הוסיפו אותם רק אם אתם רוצים אותם כאילוץ בגאנט.</p>
+    <div class="toolbar"><button type="button" class="btn small" data-moe="all">סמן הכול</button><button type="button" class="btn small" data-moe="none">בטל הכול</button><b id="moeCount"></b></div>
+    ${okYears.map(section).join('')}${omittedHtml}${moeMessages(plan)}`,
+  async (f) => {
+    const keys = [...f.querySelectorAll('[data-moe-key]:checked')].map((x) => x.dataset.moeKey);
+    const items = okYears.flatMap((y) => MV.buildImportItems(y.calendar, school, keys.filter((k) => k.startsWith(`moe:${y.id}:`))));
+    if (!items.length) { toast('לא נבחרו חופשות', true); return false; }
+    return run(() => api.importVacations(items, nowIso()), `נוספו ${items.length} חופשות`);
+  }, 'הוסף את הנבחרות');
+  const root = $dlg.querySelector('#dlgForm');
+  const boxes = (g) => [...root.querySelectorAll('[data-moe-key]:not(:disabled)')].filter((x) => x.dataset.moeGrp === g);
+  const upd = () => { const n = root.querySelectorAll('[data-moe-key]:checked').length; root.querySelector('#moeCount').textContent = n ? `יתווספו ${n} חופשות` : 'עוד לא נבחרו חופשות'; };
+  root.addEventListener('change', upd);
+  root.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-moe-grp-sel],[data-moe-grp-all],[data-moe-grp-none]');
+    if (!t) return;
+    e.preventDefault();
+    if (t.dataset.moeGrpSel) boxes(t.dataset.moeGrpSel).forEach((x) => { x.checked = true; });
+    else if (t.dataset.moeGrpAll) boxes(t.dataset.moeGrpAll).forEach((x) => { x.checked = true; });
+    else boxes(t.dataset.moeGrpNone).forEach((x) => { x.checked = false; });
+    upd();
+  });
+  root.querySelector('[data-moe="all"]').addEventListener('click', () => { root.querySelectorAll('[data-moe-key]:not(:disabled)').forEach((x) => { x.checked = true; }); upd(); });
+  root.querySelector('[data-moe="none"]').addEventListener('click', () => { root.querySelectorAll('[data-moe-key]').forEach((x) => { x.checked = false; }); upd(); });
+  upd();
+}
+function editVacationDialog(id) {
+  const v = state.vacations.find((x) => x.id === id);
+  if (!v || !moeSupported()) return;
+  openDialog(`<h2>עריכת חופשה</h2>
+    ${v.src ? '<p class="muted">חופשה שיובאה מלוח משרד החינוך. העריכה נשמרת, וייבוא חוזר לא ישנה אותה ולא יוסיף אותה שוב.</p>' : ''}
+    <label>שם <input type="text" name="title" required value="${esc(v.title)}"></label>
+    <div class="row2"><label>מתאריך <input type="date" name="start" required value="${esc(v.start)}"></label><label>עד תאריך <input type="date" name="end" required value="${esc(v.end)}"></label></div>`,
+  (f) => run(() => api.updateVacation(id, fd(f)), 'החופשה עודכנה'));
 }
 
 // ---------- תלמידים ----------
@@ -3393,6 +3531,9 @@ document.addEventListener('click', async (ev) => {
     case 'tpl-down': await run(() => api.moveTemplateItem(id, 'down')); break;
     case 'apply-template': applyTemplateDialog(); break;
     case 'add-vac': vacationDialog(); break;
+    case 'moe-pick': await moePick(); break;
+    case 'moe-school': moeAskSchool(); break;
+    case 'edit-vac': editVacationDialog(id); break;
     case 'adm-done': await run(() => api.updateAdminEvent(id, { done: true }), 'סומן כבוצע'); break;
     case 'adm-add-defaults': await run(() => api.addDefaultAdminEvents(), 'האירועים המנהליים נוספו'); break;
     case 'adm-del': confirmDialog('למחוק את התזכורת? אפשר להחזיר תזכורות ברירת מחדל בכפתור "הוסף אירועים מנהלתיים".', 'מחיקה', () => run(() => api.deleteAdminEvent(id), 'התזכורת נמחקה')); break;

@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>מדריך למורה | מערכת ליווי עבודות גמר</title>
+<meta name="description" content="מדריך שימוש מקיף למורה במערכת ליווי עבודות הגמר: תהליכי עבודה מההגדרה ועד פרסום הציון, הסבר מסך אחר מסך, שאלות נפוצות וטעויות שכדאי למנוע.">
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--text:#1d2433;--muted:#66708a;--line:#e1e6ef;--brand:#2f6fed;--brand-dark:#2458c4;--brand-soft:#e8f0ff;--ok:#2a9d6a;--ok-soft:#e6f6ee;--warn:#b58105;--warn-soft:#fff5da;--bad:#c92a3a;--bad-soft:#fdeaec;--hero1:#1c3f8f;--hero2:#2f6fed;--shadow:0 8px 24px rgba(30,50,100,.07);--accent:#f59e0b}
+@media (prefers-color-scheme:dark){:root{--bg:#11151f;--card:#1a2030;--text:#e8ecf5;--muted:#98a3bd;--line:#2a3350;--brand:#6c97ff;--brand-dark:#8fb0ff;--brand-soft:#1f2a47;--ok:#4cc38a;--ok-soft:#173226;--warn:#e8b84a;--warn-soft:#3a3018;--bad:#ff7a86;--bad-soft:#3b1d22;--hero1:#14275c;--hero2:#244a9c;--shadow:none}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.8 "Segoe UI",Arial,"Noto Sans Hebrew",sans-serif}
+a{color:var(--brand-dark)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{line-height:1.35;margin:0}
+h2{font-size:27px;color:var(--brand-dark);margin-bottom:12px}
+h3{font-size:20px;margin:26px 0 8px}
+h4{font-size:17px;margin:18px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:8px 0;padding-inline-start:26px}
+li{margin:4px 0}
+.hero{background:linear-gradient(120deg,var(--hero1),var(--hero2));color:#fff;padding:46px 20px 78px}
+.wrap{max-width:1180px;margin:auto}
+.hero .eyebrow{font-size:14px;font-weight:800;letter-spacing:.05em;color:#cfe0ff}
+.hero h1{font-size:clamp(30px,4.6vw,48px);margin:10px 0 12px}
+.hero p{font-size:19px;max-width:780px;color:#e6eeff;margin:0}
+.hero .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero .cta a{background:#fff;color:#1c3f8f;text-decoration:none;font-weight:700;padding:9px 18px;border-radius:999px}
+.hero .cta a.ghost{background:transparent;color:#fff;border:1.5px solid #ffffff88}
+.layout{max-width:1220px;margin:-40px auto 70px;padding:0 18px;display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px;align-items:start}
+.toc{position:sticky;top:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px;max-height:calc(100vh - 28px);overflow:auto}
+.toc input{width:100%;font:inherit;font-size:15px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);margin-bottom:10px}
+.toc h5{margin:14px 0 4px;font-size:12.5px;color:var(--muted);letter-spacing:.05em}
+.toc a{display:block;text-decoration:none;color:var(--text);font-size:14.5px;line-height:1.45;padding:5px 9px;border-radius:8px}
+.toc a:hover{background:var(--brand-soft)}
+.toc a.on{background:var(--brand-soft);color:var(--brand-dark);font-weight:700}
+.toc-toggle{display:none}
+section.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:28px;margin-bottom:22px}
+.badge{display:inline-block;font-size:13px;font-weight:800;color:var(--brand-dark);background:var(--brand-soft);padding:2px 12px;border-radius:999px;margin-bottom:10px}
+.lead{font-size:19px}
+.muted{color:var(--muted)}
+.box{padding:14px 18px;border-radius:12px;margin:16px 0;border-inline-start:5px solid}
+.box.info{background:var(--brand-soft);border-color:var(--brand)}
+.box.tip{background:var(--ok-soft);border-color:var(--ok)}
+.box.warn{background:var(--warn-soft);border-color:var(--warn)}
+.box.mistake{background:var(--bad-soft);border-color:var(--bad)}
+.box b.t{display:block;margin-bottom:2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tile{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.tile h3,.tile h4{margin-top:0}
+.tile a.big{text-decoration:none;color:inherit;display:block}
+.path{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.path span{background:var(--brand-soft);color:var(--brand-dark);font-weight:700;border-radius:10px;padding:8px 14px;font-size:15px}
+.path span+span:before{content:"←";margin-inline-end:8px;color:var(--muted)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+.steps>li{counter-increment:s;position:relative;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 18px 14px 18px;padding-inline-start:64px;margin:10px 0}
+.steps>li:before{content:counter(s);position:absolute;inset-inline-start:16px;top:12px;width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps>li b.h{display:block;font-size:17.5px}
+.steps>li .where{display:inline-block;font-size:13px;font-weight:700;background:var(--brand-soft);color:var(--brand-dark);border-radius:999px;padding:0 10px;margin-inline-start:6px}
+figure{margin:18px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg)}
+figure img{display:block;width:100%;height:auto;cursor:zoom-in}
+figcaption{padding:12px 16px;font-size:15px;color:var(--muted);border-top:1px solid var(--line)}
+figcaption ol{margin:6px 0 0;padding-inline-start:0;list-style:none;display:grid;gap:3px}
+figcaption li{margin:0;padding-inline-start:30px;position:relative}
+figcaption li:before{content:attr(data-n);position:absolute;inset-inline-start:0;top:3px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center}
+.ph{border:2px dashed var(--line);border-radius:14px;padding:22px;text-align:center;color:var(--muted);margin:18px 0;background:var(--bg)}
+details.acc{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:var(--card)}
+details.acc>summary{cursor:pointer;padding:12px 18px;font-weight:700;list-style:none;display:flex;align-items:center;gap:10px}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary:after{content:"▾";margin-inline-start:auto;color:var(--muted);transition:transform .2s}
+details.acc[open]>summary:after{transform:rotate(180deg)}
+details.acc>div{padding:0 18px 14px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:16px}
+th,td{border:1px solid var(--line);padding:9px 12px;text-align:start;vertical-align:top}
+th{background:var(--brand-soft);color:var(--brand-dark)}
+.btnname{display:inline-block;background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:0 8px;font-size:.92em;font-weight:600;white-space:nowrap}
+kbd{font:inherit;font-size:.9em;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:0 6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.tags span{font-size:12.5px;font-weight:700;border-radius:999px;padding:1px 10px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.check{list-style:none;padding:0}
+.check li{border-bottom:1px solid var(--line);padding:8px 0}
+.check li:before{content:"☐";color:var(--brand);font-weight:800;margin-inline-end:10px}
+.print-btn{float:left;font:inherit;font-size:15px;background:var(--card);border:1px solid var(--line);color:var(--brand-dark);border-radius:10px;padding:7px 14px;cursor:pointer}
+.print-only{display:none}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:0 20px 44px}
+dialog.zoom{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}
+dialog.zoom::backdrop{background:rgba(10,15,30,.8)}
+dialog.zoom img{max-width:96vw;max-height:92vh;border-radius:10px;display:block}
+.hide{display:none!important}
+@media (max-width:960px){
+ .layout{display:block;margin-top:-34px}
+ .toc{position:static;max-height:none;margin-bottom:18px}
+ .toc-body{display:none}
+ .toc.open .toc-body{display:block}
+ .toc-toggle{display:flex;width:100%;font:inherit;font-weight:700;background:none;border:0;color:var(--text);padding:2px 0;cursor:pointer;justify-content:space-between}
+ .grid2,.grid3{grid-template-columns:1fr}
+ section.panel{padding:20px}
+ .print-btn{float:none;display:block;margin-bottom:12px}
+ h2{font-size:23px}
+}
+@media print{
+ body{background:#fff;font-size:11pt;color:#000}
+ .hero{background:#fff!important;color:#000!important;padding:0 0 10px;border-bottom:2px solid #2458c4}
+ .hero p,.hero .eyebrow{color:#333!important}
+ .hero .cta,.toc,.print-btn,.toc-toggle{display:none!important}
+ .layout{display:block;margin:0;max-width:none;padding:0}
+ section.panel{box-shadow:none;border:0;border-bottom:1px solid #ccc;border-radius:0;padding:14px 0;margin:0}
+ details.acc>div{display:block}
+ details.acc:not([open])>div{display:block}
+ figure,.box,.steps>li,.tile,table{break-inside:avoid}
+ h2,h3{break-after:avoid}
+ figure img{cursor:default;max-height:340px;object-fit:contain}
+ a{color:#000;text-decoration:none}
+ .print-only{display:block}
+}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+ <div class="eyebrow">מדריך שימוש למורה</div>
+ <h1>מערכת ליווי עבודות גמר: מדריך מלא</h1>
+ <p>איך מנהלים עבודת גמר מתחילת השנה ועד פרסום הציונים, בלי לאבד גרסאות, מועדים והערות. המדריך מיועד גם למי שמתחיל וגם למי ששואל "איך עושים את זה".</p>
+ <div class="cta"><a href="#first-week">אני חדש: מתחילים כאן</a><a href="#flow-grade">התהליך המלא: מהגשה לציון</a><a href="#mistakes" class="ghost">טעויות נפוצות</a></div>
+</div></header>
+
+<div class="layout">
+<aside class="toc" id="toc">
+ <button class="toc-toggle" type="button" aria-expanded="false" id="tocBtn"><span>תוכן העניינים וחיפוש</span><span>▾</span></button>
+ <div class="toc-body">
+  <input type="search" id="q" placeholder="חיפוש במדריך…" aria-label="חיפוש במדריך">
+  <h5>היכרות</h5>
+  <a href="#overview">מה המערכת עושה</a>
+  <a href="#first-week">שבוע ראשון</a>
+  <a href="#map">מפת המערכת</a>
+  <h5>תהליכים מתחילה ועד סוף</h5>
+  <a href="#flow-grade">מהגשה ועד ציון מפורסם</a>
+  <a href="#flow-fix">החזרה לתיקון</a>
+  <a href="#flow-dates">שינוי מועדים וארכות</a>
+  <a href="#flow-end">סיום מחזור</a>
+  <h5>מסך אחר מסך</h5>
+  <a href="#s-home">בית והתראות</a>
+  <a href="#s-plan">מחזור, משימות ובנק</a>
+  <a href="#s-gantt">גאנט ולוח שנה</a>
+  <a href="#s-people">תלמידים וקבוצות</a>
+  <a href="#s-subs">הגשות ובדיקה</a>
+  <a href="#s-review">מסך הבדיקה</a>
+  <a href="#s-rubrics">מחוונים וניקוד</a>
+  <a href="#s-grades">ציונים</a>
+  <a href="#s-publish">פרסום ומה התלמיד רואה</a>
+  <a href="#s-notif">התראות ותזכורות</a>
+  <a href="#s-tools">Notes, גיבוי וארכיון</a>
+  <h5>עזר</h5>
+  <a href="#mistakes">טעויות נפוצות</a>
+  <a href="#faq">שאלות נפוצות</a>
+  <a href="#glossary">מילון מונחים</a>
+  <a href="#checklist">רשימת בדיקה</a>
+ </div>
+</aside>
+
+<main id="content">
+
+<section class="panel" id="overview" data-s>
+ <button class="print-btn" onclick="window.print()" type="button">הדפסה / שמירה כ-PDF</button>
+ <span class="badge">כדאי לקרוא קודם</span>
+ <h2>מה המערכת עושה, ולמה כדאי להבין את ההיגיון שלה</h2>
+ <p class="lead">המערכת מלווה עבודת גמר לאורך זמן. היא מרכזת במקום אחד את המשימות והמועדים, ההגשות של התלמידים, הבדיקה וההערות, והציונים.</p>
+ <div class="path"><span>1. תכנון</span><span>2. הגשה</span><span>3. בדיקה ומשוב</span><span>4. ציון</span><span>5. פרסום</span></div>
+ <p>העיקרון החשוב ביותר במערכת: <b>אתם עובדים בשקט, והתלמידים רואים רק מה שפרסמתם.</b> הערות שכתבתם, ניקוד לפי מחוון וציונים נשארים אצלכם עד שאתם לוחצים על פעולת פרסום מפורשת.</p>
+ <div class="grid2">
+  <div class="tile"><h4>נשאר אצלכם (פנימי)</h4><ul><li>הערות טיוטה</li><li>סימון "סיימתי לבדוק" והערת טיפול</li><li>ניקוד קריטריונים במחוון</li><li>ציונים שלא פורסמו</li><li>פנקס Notes והתזכורות המנהלתיות</li></ul></div>
+  <div class="tile"><h4>נראה לתלמיד (רק אחרי פעולה שלכם)</h4><ul><li>משוב שנשלח</li><li>ציון משימה שפורסם (ציון שלם בלבד)</li><li>ציון כולל שפורסם</li><li>המשימות, המועדים והארכות שלו</li></ul></div>
+ </div>
+ <div class="box info"><b class="t">איפה נשמר המידע?</b>אין שרת מרכזי. כל מורה פועל בחשבון Google שלו, והקבצים נשמרים ב-Drive שלו. מדריך ההתקנה וההצטרפות הוא מסמך נפרד, ולכן כאן מדברים רק על העבודה במערכת.</div>
+</section>
+
+<section class="panel" id="first-week" data-s>
+ <span class="badge">מורה חדש</span>
+ <h2>שבוע ראשון: סדר עבודה מומלץ</h2>
+ <p>אל תנסו ללמוד הכול בבת אחת. בנו קודם מחזור קטן שעובד, ורק אז הרחיבו.</p>
+ <ol class="steps">
+  <li><b class="h">הגדירו את המחזור <span class="where">מחזור</span></b>שם, תחילת המחזור, יעד סיום כתיבה ומועד הגנה משוער. ההגדרות האלה משפיעות על התצוגה של הגאנט והלוח.</li>
+  <li><b class="h">הכניסו תלמידים וקבוצות <span class="where">תלמידים, קבוצות</span></b>הוסיפו תלמידים, צרו קבוצות ושייכו כל תלמיד לקבוצה. מסך הבית יזכיר לכם תלמידים בלי קבוצה וקבוצות ריקות.</li>
+  <li><b class="h">בנו תוכנית עבודה <span class="where">משימות, בנק משימות</span></b>הכי מהיר: "החל תוכנית עבודה מלאה". אפשר גם להוסיף משימות בודדות מהבנק או ליצור חדשות. לכל משימה קבעו סוג, מועדים ומשקל.</li>
+  <li><b class="h">בדקו את התמונה הכוללת <span class="where">גאנט, לוח שנה</span></b>חפשו חפיפות, עומס וחופשות. ב"חופשות ואילוצים" לוחצים <span class="btnname">בחירת חופשות וחגים</span>, מסמנים מה שמתאים לכם (אפשר לסמן קבוצה שלמה בלחיצה), והחופשות נכנסות לגאנט (<a href="#vacations">פרטים</a>).</li>
+  <li><b class="h">שייכו מחוונים <span class="where">מחוונים וניקוד</span></b>בכל משימה שתנקדו, בחרו מחוון בעמודה "מחוון".</li>
+  <li><b class="h">נסו מחזור בדיקה <span class="where">הכול</span></b>צרו מחזור חדש קטן עם שני תלמידים ומשימת הגשה אחת, והריצו את כל התהליך עד פרסום ציון. אחרי פעם אחת רוב המסכים יהיו ברורים.</li>
+ </ol>
+ <div class="box tip"><b class="t">עזרה בתוך המערכת</b>בראש כל מסך יש כפתור <span class="btnname">❓ איך מתחילים?</span>, ולצד פעולות רבות יש סימן <span class="btnname">?</span> עם הסבר קצר.</div>
+</section>
+
+<section class="panel" id="map" data-s>
+ <span class="badge">מפת המערכת</span>
+ <h2>איפה כל דבר נמצא</h2>
+ <p>תפריט הניווט בצד מחולק לארבע קבוצות לפי סדר העבודה. אפשר לקפל ולפתוח כל קבוצה, והמערכת זוכרת את הבחירה.</p>
+ <figure><img src="img/01-home.jpg" alt="מסך הבית עם תפריט הניווט" loading="lazy"><figcaption>מסך הבית.<ol><li data-n="1">תפריט הניווט, בארבע קבוצות</li><li data-n="2">מספרי מצב: תלמידים, קבוצות, משימות, בקשות ממתינות</li><li data-n="3">מה דורש טיפול עכשיו</li><li data-n="4">בחירת מחזור, מחזור חדש והעברה לארכיון</li></ol></figcaption></figure>
+ <table>
+  <thead><tr><th>קבוצת תפריט</th><th>מסכים</th><th>למה משמשת</th></tr></thead>
+  <tbody>
+   <tr><td><b>ראשי ומעקב</b></td><td>בית, התראות, פנקס Notes</td><td>לדעת מה דורש טיפול ולרשום לעצמכם</td></tr>
+   <tr><td><b>תכנון וניהול</b></td><td>מחזור, גאנט, לוח שנה, משימות, בנק משימות ותבניות, חופשות, תלמידים, קבוצות</td><td>לבנות ולנהל את התוכנית והמשתתפים</td></tr>
+   <tr><td><b>הגשות והערכה</b></td><td>הגשות ובדיקה, ציונים, מחוונים</td><td>לבדוק, לתת משוב, לנקד ולהעריך</td></tr>
+   <tr><td><b>ניהול מערכת</b></td><td>גיבוי ושחזור</td><td>לשמור ולהחזיר מידע</td></tr>
+  </tbody>
+ </table>
+ <h3>גאנט, לוח שנה, משימות: מה ההבדל?</h3>
+ <div class="grid3">
+  <div class="tile"><h4>משימות</h4><p>המקום <b>לנהל</b>: ליצור, לערוך, לקבוע משקלים ולאשר השלמות.</p></div>
+  <div class="tile"><h4>גאנט</h4><p>המפה <b>החזותית</b> של כל השנה: רצף, חפיפות ותלויות. כאן גם גוררים תאריכים.</p></div>
+  <div class="tile"><h4>לוח שנה</h4><p>מתאים לשאלה "<b>מה קורה השבוע?</b>" לפי תאריכים, חודשי או שבועי.</p></div>
+ </div>
+</section>
+
+<section class="panel" id="flow-grade" data-s>
+ <span class="badge">תהליך מלא</span>
+ <h2>מהגשה ועד ציון מפורסם</h2>
+ <p>זה התהליך המרכזי במערכת. הוא עובר בכמה מסכים, ולכן כדאי להכיר אותו ברצף.</p>
+ <div class="box info"><b class="t">מה צריך להיות מוכן לפני שמתחילים</b>משימה מסוג <b>הגשת תוצר</b> (ולא "אישור ביצוע"), שיוך משימה לקבוצה או לתלמידים, ומחוון משויך אם רוצים לנקד לפי קריטריונים.</div>
+ <ol class="steps">
+  <li><b class="h">התלמידים מגישים <span class="where">צד התלמיד</span></b>הם מעלים קובץ Word או PDF. המערכת ממירה קובץ Word ל-PDF לצורך הבדיקה, שומרת כל גרסה וחותמת אותה בזמן. לפני הבדיקה התלמיד לא רואה כלום מצדכם.</li>
+  <li><b class="h">מקבלים התראה <span class="where">בית או התראות</span></b>במסך הבית מופיע "הגשות ממתינות לבדיקה שלך". גם הרשימה ב"הגשות ובדיקה" נפתחת כברירת מחדל על "דורשים טיפול".</li>
+  <li><b class="h">פותחים לבדיקה <span class="where">הגשות ובדיקה</span></b>בשורת ההגשה לוחצים <span class="btnname">בדיקה</span>. אם ההמרה ל-PDF עוד לא הסתיימה, הכפתור כבוי עד שהיא מוכנה.</li>
+  <li><b class="h">קוראים ומעירים <span class="where">בדיקת עבודה</span></b>גוררים על קטע טקסט במסמך, בוחרים קטגוריה וכותבים הערה, או מוסיפים הערה כללית. ההערות נשמרות כ<b>טיוטה</b>.</li>
+  <li><b class="h">מסמנים "סיימתי לבדוק" <span class="where">בדיקה (פנימי)</span></b>זה סימון פנימי למעקב שלכם. הוא <b>לא</b> שולח דבר.</li>
+  <li><b class="h">מנקדים <span class="where">ניקוד (פנימי)</span></b>ממלאים את הקריטריונים במחוון. כשכולם מלאים, לוחצים <span class="btnname">קבע כציון המשימה</span>. הציון נכנס לטבלת הציונים ועדיין לא גלוי לתלמיד.</li>
+  <li><b class="h">שולחים משוב <span class="where">משוב לתלמידים</span></b>לוחצים <span class="btnname">שליחת משוב לתלמידים</span>. רק כעת ההערות נעשות גלויות. הערה שנשלחה אי אפשר לערוך.</li>
+  <li><b class="h">מפרסמים ציון <span class="where">מצב פרסום, או ציונים</span></b>בכרטיס "מצב פרסום" לוחצים <span class="btnname">פרסם ציון</span> לכל תלמיד, או מפרסמים מרוכז במסך "ציונים".</li>
+  <li><b class="h">בודקים מה התלמיד רואה <span class="where">הכול</span></b>התלמיד רואה ציון שלם בלבד, בלי פירוט הקריטריונים. אם טעיתם, "בטל פרסום" מסיר את הפריט מהתצוגה שלו.</li>
+ </ol>
+ <figure><img src="img/11-submissions.jpg" alt="מסך הגשות ובדיקה" loading="lazy"><figcaption>שלב 3: מסך "הגשות ובדיקה".<ol><li data-n="1">סיכום: כמה הגישו, איחורים, לא הוגשו, כשל בהמרה</li><li data-n="2">מסננים מהירים (ברירת המחדל: "דורשים טיפול")</li><li data-n="3">בחירת משימה</li><li data-n="4">שליחת משוב מרוכזת לעבודות שסומנו "סיימתי לבדוק"</li></ol></figcaption></figure>
+ <figure><img src="img/12-review-top.jpg" alt="מסך בדיקת עבודה: שלוש תיבות סטטוס" loading="lazy"><figcaption>שלבים 5, 7 ו-8 במסך הבדיקה: שלוש תיבות נפרדות בכוונה.<ol><li data-n="1">בדיקה (פנימי): סימון לעצמכם בלבד</li><li data-n="2">משוב לתלמידים: הפעולה היחידה שמפרסמת הערות, וגם "מצב פרסום" של ציונים</li><li data-n="3">החזרה לתיקון (ראו הפרק הבא)</li><li data-n="4">בחירת גרסה של ההגשה</li></ol></figcaption></figure>
+ <div class="box warn"><b class="t">הערה שכתבתם אינה הערה שנשלחה</b>עד ללחיצה על שליחה, ההערות הן טיוטה שלכם. גם "סיימתי לבדוק" ו"טופל מחוץ למערכת" אינם נשלחים לתלמידים.</div>
+ <div class="box tip"><b class="t">שאלות מתלמידים</b>תלמיד יכול לשאול שאלת הבהרה על הערה. שאלות פתוחות מופיעות במסך הבית ובתיבת המשוב. לחיצה עליהן פותחת אותן ישירות, ושם עונים.</div>
+</section>
+
+<section class="panel" id="flow-fix" data-s>
+ <span class="badge">תהליך</span>
+ <h2>החזרה לתיקון: כשהעבודה צריכה גרסה נוספת</h2>
+ <p>כשעבודה דורשת תיקונים לפני שתנקדו אותה, מחזירים אותה לתלמידים במקום להשאיר אותה פתוחה.</p>
+ <ol class="steps">
+  <li><b class="h">בגרסה האחרונה של העבודה לוחצים <span class="btnname">החזרה לתיקון</span> <span class="where">בדיקת עבודה</span></b>אפשר להחזיר רק את הגרסה האחרונה. הכפתור לא יופיע בגרסה ישנה, ולא בזמן שכבר ממתינים לתיקון.</li>
+  <li><b class="h">כותבים משוב וקובעים מועד תיקון</b>המשוב נשלח עם ההחזרה, וגם הערות הטיוטה מתפרסמות (מוצג סיכום לפני). העבודה מסומנת "לא הושלמה".</li>
+  <li><b class="h">ממתינים לגרסה מתוקנת</b>אפשר לעדכן את מועד התיקון (ארכה) בתיבה "החזרה לתיקון" כל עוד התיקון לא הוגש.</li>
+  <li><b class="h">התלמיד מגיש</b>הגרסה החדשה מסומנת בהגשות כ"תיקון הוגש". היא <b>לא</b> נחשבת עבודה חדשה שממתינה לבדיקה, וגם אינה אישור.</li>
+  <li><b class="h">בודקים שוב, ביוזמתכם <span class="where">פתח לבדיקה חוזרת</span></b>אם רוצים לבדוק את התיקון, לוחצים <span class="btnname">פתח לבדיקה חוזרת</span>. הניקוד של כל גרסה נשמר בנפרד.</li>
+ </ol>
+ <figure><img src="img/15-review-return.jpg" alt="תיבת החזרה לתיקון" loading="lazy"><figcaption>הכפתור "החזרה לתיקון" בתיבה השמאלית של מסך הבדיקה.<ol><li data-n="1">החזרה לתיקון, עם משוב ומועד</li></ol></figcaption></figure>
+ <div class="box tip"><b class="t">איפה רואים את זה בהגשות</b>בסינון מופיעים "הוחזרו לתיקון" ו"תיקון הוגש" (כשיש כאלה), וגם במסך הבית יש הודעה על גרסאות מתוקנות שהוגשו.</div>
+</section>
+
+<section class="panel" id="flow-dates" data-s>
+ <span class="badge">תהליך</span>
+ <h2>שינוי מועדים וארכות</h2>
+ <p>יש שלוש דרכים לשנות מועד, והן שונות זו מזו:</p>
+ <table>
+  <thead><tr><th>מה צריך</th><th>הפעולה</th><th>איפה</th></tr></thead>
+  <tbody>
+   <tr><td>להזיז משימה לכל הכיתה</td><td>גוררים את הפס בגאנט, או את קצותיו לשינוי התחלה או סיום</td><td>גאנט, תצוגת "כל הכיתה"</td></tr>
+   <tr><td>להזיז הרבה משימות יחד</td><td><span class="btnname">שינוי מועד כיתתי</span></td><td>גאנט, תצוגת "כל הכיתה"</td></tr>
+   <tr><td>מועד שונה לקבוצה או לתלמיד אחד</td><td><b>ארכה נקודתית</b>: בוחרים יחידה ותאריך, ולוחצים "הוספת ארכה"</td><td>חלון המשימה (לחיצה על פס או "פרטים ועריכה")</td></tr>
+  </tbody>
+ </table>
+ <figure><img src="img/05b-task-dialog-extension.jpg" alt="חלון משימה עם ארכה נקודתית" loading="lazy"><figcaption>חלון המשימה, בתחתית.<ol><li data-n="1">ארכה נקודתית: בוחרים קבוצה או תלמיד ותאריך חדש</li><li data-n="2">הוספת ארכה</li></ol></figcaption></figure>
+ <h3>מה קורה כשמזיזים תאריך בגרירה</h3>
+ <p>אם לשינוי יש השלכות, מוצג חלון אישור לפני השמירה. הוא מציג:</p>
+ <ul><li>תלויות שיישברו: משימה שתתחיל לפני שהקודמת הסתיימה.</li><li>חפיפה עם חופשה. המערכת לא מזיזה שום דבר אוטומטית.</li><li>ארכות קיימות. כברירת מחדל הן זזות יחד עם המשימה, ואפשר לסמן להשאיר אותן במקומן.</li><li>אפשרות להזיז גם את המשימות התלויות באותו מספר ימים.</li></ul>
+ <p>אם סוגרים את החלון בלי לאשר, הפס חוזר למקומו.</p>
+ <div class="box info"><b class="t">ארכה אינה החרגה</b><b>ארכה</b> משנה מועד הגשה ליחידה אחת ואינה נוגעת בציון. <b>החרגה</b> (במסך "ציונים") מוציאה משימה מחישוב הציון הכולל. תלמיד שפשוט לא הגיש בדרך כלל מקבל 0, ואינו מוחרג.</div>
+ <div class="box tip"><b class="t">התראות על מועדים</b>תזכורות הגשה נקבעות לפי המועד התקף של כל יחידה, כולל ארכה, ונפסקות כשמוגשת עבודה או כשהמועד זז. פרטים בפרק "התראות ותזכורות".</div>
+</section>
+
+<section class="panel" id="flow-end" data-s>
+ <span class="badge">תהליך</span>
+ <h2>סיום מחזור עבודות הגמר</h2>
+ <ol class="steps">
+  <li><b class="h">בודקים את טבלת הציונים <span class="where">ציונים</span></b>אין תלמיד שחסר לו ציון, וסכום המשקלים הנספרים הוא 100%. אחרת הציון הכולל "לא מחושב" וההסבר מופיע ליד התלמיד.</li>
+  <li><b class="h">משלימים או מחריגים בנימוק</b>תלמיד שלא הגיש מקבל 0, או מוחרג בהחלטה מנומקת. עריכת משקלים אישיים אפשרית כשיש צורך.</li>
+  <li><b class="h">מפרסמים לפי החלטה פדגוגית</b>"פרסום ציון כולל לכל מי שהציון הכולל שלו מחושב", או לתלמיד אחד בכל פעם.</li>
+  <li><b class="h">מורידים גיבוי <span class="where">גיבוי ושחזור</span></b>הגיבוי לא כולל את קובצי ההגשות. אלה נשארים ב-Drive, ולכן אל תמחקו אותם משם.</li>
+  <li><b class="h">מעבירים לארכיון <span class="where">שורת המחזור</span></b>המחזור נשמר לקריאה בלבד. בסוף אפשר להחליט אם התלמידים יוכלו לצפות בו.</li>
+ </ol>
+</section>
+
+<section class="panel" id="s-home" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>בית והתראות</h2>
+ <p>מסך הבית הוא נקודת ההתחלה היומית: הוא מראה מה דורש את תשומת לבכם עכשיו. בכל הודעה יש קישור למקום שבו מטפלים בה.</p>
+ <h3>הודעות שיכולות להופיע</h3>
+ <ul>
+  <li><b>התראות חדשות</b> ושאלות הבהרה מתלמידים.</li>
+  <li><b>בקשות השלמה ממתינות לאישור</b>: משימות "אישור ביצוע" שתלמיד סימן כהושלמו.</li>
+  <li><b>הגשות ממתינות לבדיקה</b>, גרסאות מתוקנות שהוגשו, ועבודות שסומנו "סיימתי לבדוק" וטרם נשלח עליהן משוב.</li>
+  <li><b>הגשות עם כשל בהמרה ל-PDF.</b> ההגשה נקלטה וחותמת הזמן נשמרה. אפשר לנסות המרה שוב או לבקש PDF נוסף.</li>
+  <li><b>קבוצות או תלמידים שלא הגישו אחרי המועד.</b></li>
+  <li><b>תלמידים ללא קבוצה</b> וקבוצות ריקות.</li>
+  <li><b>אזהרות תכנון</b>: תלויות שבורות.</li>
+  <li><b>תזכורת גיבוי</b> כשעברו שבעה ימים או יותר.</li>
+ </ul>
+ <h3>תזכורות מנהלתיות (📌)</h3>
+ <p>כרטיס שמרכז אירועים מנהלתיים אישיים שלכם, למשל מועדים של בית הספר. הם <b>אינם משימות</b>, התלמידים לא רואים אותם, והם לא משפיעים על ציונים. בכל תזכורת יש <span class="btnname">סימון כבוצע</span> ועריכה, ואפשר להוסיף אירועים מוכנים בכפתור "הוסף אירועים מנהלתיים". הם מופיעים גם בגאנט.</p>
+</section>
+
+<section class="panel" id="s-plan" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>מחזור, משימות ובנק משימות</h2>
+ <h3>מחזור</h3>
+ <p><b>מחזור</b> הוא שנת עבודה של קבוצת תלמידים, עם התלמידים, הקבוצות, המשימות, ההגשות והציונים שלה. אפשר לנהל כמה מחזורים. המחזור שנבחר בשורה העליונה הוא זה שרואים ועורכים, ומעבר ביניהם משנה את כל הנתונים המוצגים.</p>
+ <figure><img src="img/10-cycle.jpg" alt="מסך מחזור" loading="lazy"><figcaption>מסך "מחזור".<ol><li data-n="1">שם, תחילת המחזור, יעד סיום כתיבה ומועד הגנה</li><li data-n="2">העברת המחזור לסל (לא מחיקה לצמיתות)</li></ol></figcaption></figure>
+ <ul>
+  <li><b>מחזור חדש:</b> מתחיל ריק. בנק המשימות משותף ואפשר להחיל אותו עליו.</li>
+  <li><b>העבר לארכיון:</b> קריאה בלבד, וגישת התלמידים נסגרת. במסך "מחזור" אפשר לפתוח להם גישת צפייה בלי להחזיר את המחזור לפעיל.</li>
+  <li><b>העבר לסל:</b> נשמר גיבוי אוטומטי, והמחזור נשאר בסל לפחות 30 יום. שחזור מהסל נעשה ב"גיבוי ושחזור".</li>
+ </ul>
+ <h3>משימות</h3>
+ <figure><img src="img/04-tasks.jpg" alt="מסך משימות" loading="lazy"><figcaption>מסך "משימות".<ol><li data-n="1">הוספה מהבנק</li><li data-n="2">החלת תוכנית עבודה מלאה</li><li data-n="3">משימה חדשה</li><li data-n="4">לשוניות: פעילות ולא פעילות</li></ol></figcaption></figure>
+ <p>בכל משימה קובעים:</p>
+ <table>
+  <tbody>
+   <tr><th>שדה</th><th>מה זה אומר</th></tr>
+   <tr><td>סוג: קבוצתית או אישית</td><td>קבוצתית ניתנת לקבוצה, אישית לכל תלמיד בנפרד</td></tr>
+   <tr><td>סוג המשימה</td><td><b>אישור ביצוע</b>: המורה מאשר שהושלמה. <b>הגשת תוצר</b>: התלמיד מעלה קובץ. רק הגשת תוצר מופיעה ב"הגשות ובדיקה" ומקבלת תזכורות.</td></tr>
+   <tr><td>משקל (%)</td><td>חלקה של המשימה בציון העבודה. סכום המשקלים הנספרים צריך להיות 100%.</td></tr>
+   <tr><td>התחלה ומועד הגשה</td><td>חלון הזמן, כפי שיוצג בגאנט וללוח</td></tr>
+   <tr><td>תלויה במשימות</td><td>משימות שצריכות להסתיים לפני שהמשימה מתחילה</td></tr>
+   <tr><td>למי המשימה</td><td>בלי סימון: לכל הקבוצות או התלמידים</td></tr>
+   <tr><td>קישורים</td><td>קישורי עזר שהתלמיד רואה</td></tr>
+  </tbody>
+ </table>
+ <h4>התקדמות לעומת השלמה</h4>
+ <p><b>אחוז התקדמות</b> הוא דיווח של התלמיד או הקבוצה כמה כבר בוצע, ואינו ציון. <b>השלמה</b> נחשבת רק אחרי שאישרתם. תלמיד יכול לבקש אישור, ואתם מאשרים או מחזירים לתיקון. אפשר גם "פתח מחדש" אחרי אישור.</p>
+ <figure><img src="img/05-task-dialog.jpg" alt="חלון משימה" loading="lazy"><figcaption>חלון משימה: פרטים, תלויות, שיוך והתקדמות לכל קבוצה.</figcaption></figure>
+ <h4>משימה לא פעילה</h4>
+ <p>"הפוך ללא פעילה" (בתפריט "עוד") מוציאה משימה מהתוכנית ומשאירה אותה שמורה: היא לא בגאנט, בלוח, אצל התלמידים או בחישוב ההתקדמות, ואינה יוצרת איחורים. <b>משימה לא פעילה אינה משימה שהושלמה.</b> אפשר "הפעל מחדש" או מחיקה לצמיתות.</p>
+ <h3>בנק משימות ותבניות</h3>
+ <p>מאגר של משימות מוכנות, משותף לכל המחזורים שלכם. אפשר להוסיף משימה אחת, או להחיל תוכנית עבודה שלמה.</p>
+ <figure><img src="img/06-bank.jpg" alt="בנק משימות" loading="lazy"><figcaption>בנק המשימות. לכל פריט מוצג מצבו במחזור: לא נוספה, פעילה, או לא פעילה.</figcaption></figure>
+ <div class="box info"><b class="t">כל משימה שנוספת היא עותק עצמאי</b>עריכת עותק לא משנה את הבנק, ושינוי בבנק לא משנה עותקים שכבר נוספו. "עותק נוסף" יוצר משימה נוספת מאותו פריט.</div>
+ <h3 id="vacations">חופשות ואילוצים</h3>
+ <p>הגדירו ימי חופשה או אילוצים. הם מסומנים בגאנט ובלוח, ומשימות החופפות אליהם מקבלות אזהרה. <b>המערכת לא מזיזה מועדים אוטומטית</b>.</p>
+ <figure><img src="img/07-vacations.jpg" alt="מסך חופשות ואילוצים" loading="lazy"><figcaption>מסך "חופשות ואילוצים".<ol><li data-n="1">בחירת חופשות וחגים של משרד החינוך</li><li data-n="2">סוג בית ספר (יהודי או ערבי), הגדרה של המחזור</li><li data-n="3">הוספה ידנית של חופשה או אילוץ</li></ol></figcaption></figure>
+ <h4>בחירת חופשות וחגים של משרד החינוך</h4>
+ <p>במקום להקליד חופשות ביד, לוחצים <span class="btnname">🏛️ בחירת חופשות וחגים</span>. המערכת קובעת לבד את שנות הלימודים שבהן המחזור פועל (לפי תאריכי המחזור, כולל מחזור שנמשך על פני שתי שנים) ומציגה את כל החגים, החופשות וימי הזיכרון הרשמיים של משרד החינוך. <b>שום דבר לא נכנס מעצמו</b>: אתם בוחרים מה יתווסף. אפשר לפתוח את החלון בכל שלב, וגם שוב בכל שנה.</p>
+ <ol class="steps">
+  <li><b class="h">בפעם הראשונה: בוחרים סוג בית ספר</b>יהודי או ערבי (יהודי מופיע ראשון). הלוח הרשמי שונה ביניהם. הבחירה נשמרת כ<b>הגדרה של המחזור</b> (ולא רק בדפדפן), ולכן היא נשארת גם במכשיר אחר. אפשר לשנות אותה בכפתור "שינוי".</li>
+  <li><b class="h">מסמנים מה להכניס</b>הרשימה מחולקת לקבוצות. אפשר לסמן פריטים אחד־אחד, ואפשר ללחוץ על שם קבוצה כדי לסמן אותה כולה: למשל <b>"סמן: חגי ישראל וחופשות רשמיות"</b> בלוח היהודי, או <b>"סמן: מוסלמים"</b> בלוח הערבי. בראש החלון מוצג כמה חופשות יתווספו.</li>
+  <li><b class="h">לוחצים "הוסף את הנבחרות"</b>החופשות נוספות מיד. כל חופשה מסומנת בטבלה "🏛️ משרד החינוך", עם השנה, סוג בית הספר וקישור לחוזר הרשמי.</li>
+  <li><b class="h">עורכים או מוחקים כרצונכם</b>כל חופשה אפשר לערוך (שם, תאריכים) או למחוק, כמו חופשה רגילה.</li>
+ </ol>
+ <figure><img src="img/07d-vacations-pick-jewish.jpg" alt="חלון בחירת חופשות וחגים, לוח יהודי" loading="lazy"><figcaption>חלון הבחירה (לוח יהודי).<ol><li data-n="1">קבוצות: לחיצה על שם קבוצה מסמנת את כולה</li><li data-n="2">כמה חופשות יתווספו</li><li data-n="3">הפריטים של הקבוצה, עם "סמן את כולם" ו"בטל"</li></ol></figcaption></figure>
+ <h4>מה יש ברשימה</h4>
+ <ul>
+  <li><b>לוח יהודי:</b> חגי ישראל וחופשות רשמיות (ראש השנה, יום כיפור, סוכות, חנוכה, פורים, פסח, יום העצמאות, שבועות); מועדים נוספים שהם ימי לימוד (חג הסיגד, ט"ו בשבט, ל"ג בעומר, יום ירושלים, אסרו חג); ימי צום; ימי הזיכרון הממלכתיים (כולל יום הזיכרון לשואה ולחללי צה"ל); וחגי עדות למורים נוצרים ודרוזים.</li>
+  <li><b>לוח ערבי:</b> חופשת החורף והאביב, חגי מוסלמים, העדה האחמדית, נוצרים (קתולים, אורתודוקסים ועוד), דרוזים, ומורים יהודים בבתי ספר ערביים. תנאים כמו "בית ספר בשישה ימי לימוד" מופיעים בנפרד.</li>
+ </ul>
+ <div class="box info"><b class="t">ימי לימוד אינם חופשה</b>ימי זיכרון, ימי צום, ל"ג בעומר ועוד הם ימי לימוד עם אירוע, ולכן מסומנים "יום לימודים, לא חופשה". הכניסו אותם רק אם אתם רוצים לסמן אותם כאילוץ בגאנט. פריט שהמשרד טרם פרסם לו תאריך (למשל חגי מוסלמים בלוח היהודי) מופיע בהודעה בתחתית החלון, ולא מוצג תאריך משוער.</div>
+ <figure><img src="img/07b-vacations-imported.jpg" alt="חופשות שיובאו" loading="lazy"><figcaption>אחרי ההוספה: החופשות בטבלה, עם סימון המקור.</figcaption></figure>
+ <div class="box info"><b class="t">מה המערכת מבטיחה</b><ul><li><b>אין כפילויות.</b> פתיחה חוזרת מוסיפה רק מה שחסר, גם אם ערכתם חופשה שיובאה קודם.</li><li><b>שום חופשה שערכתם לא נדרסת או נמחקת.</b> חופשה שהוספתם ידנית נשארת כפי שהיא.</li><li><b>מועדי המשימות וההגשות לא משתנים.</b> אם חופשה חופפת משימה, תופיע האזהרה הרגילה, וההחלטה אם להזיז נשארת שלכם.</li><li><b>חופשה שמחקתם</b> אפשר להכניס שוב.</li></ul></div>
+ <div class="box tip"><b class="t">החלפת סוג בית ספר אחרי שכבר יובאו חופשות</b>המערכת תציג הודעה ותציע להסיר את החופשות שיובאו מהלוח הקודם, באישורכם. יוסרו רק חופשות מיובאות שלא ערכתם. חופשות שהוספתם בעצמכם, וחופשות מיובאות שערכתם, נשארות. מועדי משימות והגשות לא משתנים. אפשר גם להחליף ולשמור את כל החופשות.</div>
+ <figure><img src="img/07c-vacations-pick.jpg" alt="חלון בחירה, לוח ערבי" loading="lazy"><figcaption>אותו חלון בלוח ערבי: אחרי לחיצה על "סמן: מוסלמים" כל החגים המוסלמיים מסומנים.<ol><li data-n="1">קבוצות</li><li data-n="2">כמה חופשות יתווספו</li><li data-n="3">הפריטים של הקבוצה</li></ol></figcaption></figure>
+ <div class="box warn"><b class="t">מאיפה התאריכים, ומה אם הלוח עוד לא פורסם</b>התאריכים נלקחו מחוזרי המנהל הכללי של משרד החינוך (דף "לוח חופשות", אתר משרד החינוך) ואומתו אחד אחד, כולל בדיקה של יום השבוע. הלוח של שנת לימודים חדשה מתווסף למערכת בעדכון, בלי שתצטרכו להעלות קבצים. אם הלוח הרשמי של השנה שבה המחזור פועל טרם פורסם, תוצג הודעה ברורה ולא יוצגו תאריכים משוערים. כל תאריך שתוקן בגלל טעות הקלדה בחוזר, וכל פריט שהושמט כי אי אפשר היה לאמת אותו, מתועדים במפורש בקובץ הנתונים של המערכת. אם יש לכם ספק לגבי חג מסוים, בדקו מול החוזר הרשמי הקשור בטבלה.</div>
+</section>
+
+<section class="panel" id="s-gantt" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>גאנט ולוח שנה</h2>
+ <figure><img src="img/02-gantt.jpg" alt="הגאנט" loading="lazy"><figcaption>הגאנט.<ol><li data-n="1">מסנן: כל הכיתה, קבוצה או תלמיד</li><li data-n="2">שינוי מועד כיתתי</li><li data-n="3">הפסים: גוררים כדי להזיז, גוררים קצה כדי לשנות התחלה או סיום, לחיצה פותחת פרטים</li><li data-n="4">משימה חדשה</li></ol></figcaption></figure>
+ <ul>
+  <li><b>כל הכיתה</b> היא תצוגת העריכה. בתצוגת קבוצה או תלמיד הגאנט לקריאה בלבד.</li>
+  <li><b>מקרא:</b> משימה קבוצתית, אישית, ארכה נקודתית, אזהרת תכנון (תלות שבורה), התנגשות עם חופשה, בקשה הממתינה לאישור והושלם ואושר. הכפתור "ⓘ הסבר על הסמלים" מסביר כל סמל.</li>
+  <li>כפתורי + ו- משנים את קנה המידה, ו"היום" קופץ לתאריך הנוכחי.</li>
+ </ul>
+ <h3>לוח שנה</h3>
+ <figure><img src="img/03-calendar.jpg" alt="לוח שנה" loading="lazy"><figcaption>לוח שנה: תצוגה חודשית או שבועית, ובחירה בין "מועדי הגשה בלבד" לתצוגה שכוללת את משך המשימות.</figcaption></figure>
+</section>
+
+<section class="panel" id="s-people" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>תלמידים וקבוצות</h2>
+ <figure><img src="img/08-students.jpg" alt="תלמידים" loading="lazy"><figcaption>מסך "תלמידים".<ol><li data-n="1">חיפוש לפי שם או דוא"ל</li><li data-n="2">סינון: כולם, פעילים, לא פעילים, ללא קבוצה</li><li data-n="3">תלמיד חדש</li></ol></figcaption></figure>
+ <ul>
+  <li>שיוך לקבוצה נעשה ישירות בטבלה. התפריט "עוד" כולל <b>היסטוריית שיוך</b> וסימון "לא פעיל".</li>
+  <li>תלמיד <b>לא פעיל</b> נשאר במערכת עם הנתונים שלו, אבל לא נספר ברשימות הפעילות.</li>
+ </ul>
+ <h3>קבוצות</h3>
+ <figure><img src="img/09-groups.jpg" alt="קבוצות" loading="lazy"><figcaption>כל קבוצה מוצגת בכרטיס עם חבריה. מוסיפים תלמיד מהרשימה הנגללת, ומוציאים בכפתור "הוצאה".</figcaption></figure>
+ <div class="grid2">
+  <div class="tile"><h4>מתי לעבוד לפי קבוצה?</h4><p>כשכמה תלמידים מגישים יחד עבודה או חולקים משימות משותפות.</p></div>
+  <div class="tile"><h4>מתי לעבוד לפי תלמיד?</h4><p>כשצריך התקדמות, הערכה או ציון אישיים.</p></div>
+ </div>
+ <div class="box info"><b class="t">שינוי הרכב קבוצה</b>העברת תלמיד לקבוצה אחרת מעבירה אותו (המערכת מציינת זאת ברשימה). ציון קבוצתי חל על חברי הקבוצה <b>במועד ההגשה</b>, ולכן שינויי הרכב מאוחרים לא משנים מי זכאי לו.</div>
+ <div class="box tip"><b class="t">טיפ</b>התחילו עם קבוצת בדיקה אחת ותלמיד אחד, ובדקו שהם רואים את המשימות הנכונות, לפני שמכניסים כיתה שלמה.</div>
+</section>
+
+<section class="panel" id="s-subs" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>הגשות ובדיקה</h2>
+ <p>הרשימה המרכזית של כל ההגשות במשימות מסוג "הגשת תוצר". לכל קבוצה או תלמיד מוצגים מצב ההגשה, מועד ההגשה, וגרסה אחרונה.</p>
+ <table>
+  <thead><tr><th>מסנן</th><th>מה מציג</th></tr></thead>
+  <tbody>
+   <tr><td>דורשים טיפול (ברירת מחדל)</td><td>הגשות שממתינות לבדיקה, בקשות, כשלים וכדומה</td></tr>
+   <tr><td>כל ההגשות</td><td>הכול</td></tr>
+   <tr><td>לא הוגשו</td><td>קבוצות או תלמידים שעדיין לא הגישו</td></tr>
+   <tr><td>טופלו</td><td>סומנו "טופל" או שההשלמה אושרה</td></tr>
+   <tr><td>הוחזרו לתיקון, תיקון הוגש</td><td>מופיעים כשיש כאלה</td></tr>
+   <tr><td>הוגשו באיחור, כשל בהמרה</td><td>נבחרים מכרטיסי הסיכום למעלה</td></tr>
+  </tbody>
+ </table>
+ <h3>פעולות בשורה</h3>
+ <ul>
+  <li><span class="btnname">בדיקה</span>: פותח את מסך הבדיקה. המספר בסוגריים הוא כמות ההערות.</li>
+  <li>בתפריט <span class="btnname">עוד</span>: היסטוריית גרסאות או פרטי הגשה, הורדת קובץ המקור, הורדת ה-PDF, ניסיון המרה חוזר ו"בקש PDF נוסף".</li>
+ </ul>
+ <div class="box info"><b class="t">כשל בהמרה אינו כשל בהגשה</b>ההגשה נקלטה וחותמת הזמן נשמרה. אפשר לנסות המרה שוב, או לבקש מהתלמידים לצרף PDF. הבקשה אינה משנה את מועד ההגשה.</div>
+ <p>הגרסה האחרונה היא הנחשבת, והקודמות נשמרות. שימו לב להבדל: <b>משימה</b> יכולה להימשך זמן רב, ובתוכה יכולות להיות כמה <b>גרסאות הגשה</b>.</p>
+</section>
+
+<section class="panel" id="s-review" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>מסך הבדיקה</h2>
+ <p>מסך אחד לקריאת העבודה, הערות, ניקוד ושליחה. הוא בנוי מלמעלה למטה: שלוש תיבות סטטוס, אזור הניקוד, ואז המסמך עם לוח ההערות.</p>
+ <h3>כתיבת הערה</h3>
+ <figure><img src="img/14-review-comment.jpg" alt="כתיבת הערה על קטע" loading="lazy"><figcaption>הוספת הערה על קטע מסומן.<ol><li data-n="1">גוררים על טקסט במסמך כדי לסמן קטע</li><li data-n="2">הקטע שסומן מוצג כאן</li><li data-n="3">בוחרים קטגוריה (תוכן מדעי, ועוד)</li><li data-n="4">כותבים את ההערה</li><li data-n="5">"הוסף הערה לקטע המסומן". בלי קטע מסומן: "הוסף הערה כללית"</li></ol></figcaption></figure>
+ <ul>
+  <li><b>הערה כללית או מעוגנת:</b> אם אין טקסט שאפשר לסמן (למשל מסמך סרוק), אפשר רק הערות כלליות. המערכת מציגה על כך הודעה.</li>
+  <li><b>למי ההערה:</b> בעבודה קבוצתית אפשר לבחור "לכל הקבוצה" או הערה אישית לחבר מסוים.</li>
+  <li><b>קטגוריות:</b> "ניהול קטגוריות" מאפשר להתאים את רשימת הקטגוריות.</li>
+  <li><b>רשימת ההערות:</b> מסננים לפי כולן, טיוטות ונשלחו. אפשר להרחיב ולצמצם הכול.</li>
+  <li>בסרגל המסמך: הקטנה, הגדלה ו"התאם לרוחב".</li>
+ </ul>
+ <figure><img src="img/14b-review-comment-added.jpg" alt="הערה שנוספה" loading="lazy"><figcaption>ההערה נוספה כטיוטה. המונים מציגים כמה נשלחו וכמה בטיוטה.<ol><li data-n="1">רשימת ההערות</li></ol></figcaption></figure>
+ <div class="box warn"><b class="t">שליחה היא סופית</b>הערות שנשלחו אי אפשר לערוך. הערה שהוספתם אחר כך תישאר טיוטה עד שליחה נוספת.</div>
+ <p>בראש המסך אפשר לעבור בין גרסאות, לחזור לרשימת ההגשות או לקפוץ ל"ניקוד ולציון".</p>
+</section>
+
+<section class="panel" id="s-rubrics" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>מחוונים וניקוד</h2>
+ <p>מחוון מפרק הערכה לקריטריונים. יש שלוש רמות נפרדות:</p>
+ <ol>
+  <li><b>מחוון בסיס</b> בספרייה, משותף לכל המחזורים. מחווני ברירת המחדל לקוחים מתוכנית הלימודים.</li>
+  <li><b>מחוון משימה:</b> עותק של מחוון בסיס שמשויך למשימה במחזור. אפשר לערוך אותו בלי לשנות את הספרייה.</li>
+  <li><b>ניקוד בדיקה:</b> צילום מצב קבוע של המחוון, שנשמר כשמתחילים לנקד הגשה.</li>
+ </ol>
+ <figure><img src="img/16-rubrics.jpg" alt="מחוונים" loading="lazy"><figcaption>מסך "מחוונים וניקוד".<ol><li data-n="1">שיוך מחוון לכל משימה במחזור הנבחר</li><li data-n="2">ספריית מחווני בסיס: עריכה, שכפול והסתרה</li></ol></figcaption></figure>
+ <p>יש שני סוגי מחוון: <b>ניקוד</b> (נקודות לכל קריטריון) ו<b>רשימת בדיקה</b> (עומד או לא עומד, בלי ציון). ציון המשימה הוא תמיד בסולם 0 עד 100.</p>
+ <h3>ניקוד במסך הבדיקה</h3>
+ <figure><img src="img/13-review-score.jpg" alt="אזור הניקוד" loading="lazy"><figcaption>אזור "ניקוד (פנימי)" במסך הבדיקה. לכל קריטריון יש תיאורי רמות (ירוק, צהוב, אדום) כהכוונה. אפשר לתת כל ניקוד.<ol><li data-n="1">אזור הניקוד והציון</li></ol></figcaption></figure>
+ <ol>
+  <li>ממלאים ניקוד לכל קריטריון. כשכולם מלאים מוצג "סה"כ" וציון מתוך 100.</li>
+  <li>לוחצים <span class="btnname">קבע כציון המשימה</span>. הציון נשמר בטבלת הציונים, וציון קודם נשמר בהיסטוריה.</li>
+  <li>שינוי בניקוד אחר כך אינו משנה ציון שכבר נקבע, עד שתלחצו "עדכן את ציון המשימה".</li>
+ </ol>
+ <div class="box info"><b class="t">אם המחוון שונה אחרי שהתחלתם</b>הניקוד נשאר לפי המחוון שבו התחלתם, והמערכת מציגה הודעה שהמחוון שונה. כך בדיקה שהתחילה לא משתנה בהמשך.</div>
+ <h4>עוד באזור הניקוד</h4>
+ <ul>
+  <li><b>ציון ידני:</b> כשאין מחוון, מזינים ציון ישירות. בעבודה קבוצתית יש גם "ציון קבוצתי ידני (בלי מחוון)".</li>
+  <li><b>סיכוני פסילה:</b> סימון בלבד, אינו משנה ציון. כשמסמנים, מוצג מראש נוסח ההודעה שתישלח לתלמיד.</li>
+  <li><b>הערת ניקוד פנימית</b>, וגם הצגת הניקוד של גרסאות קודמות של אותה עבודה.</li>
+ </ul>
+</section>
+
+<section class="panel" id="s-grades" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>ציונים</h2>
+ <p>המסך נקרא "ציונים (פנימי)". הוא מציג את כל התלמידים, כל משימה בעלת משקל, ואת הציון הכולל.</p>
+ <figure><img src="img/17-grades.jpg" alt="טבלת ציונים" loading="lazy"><figcaption>מסך הציונים (גלילה לראות את הטבלה).<ol><li data-n="1">פרסום לתלמידים: פרסום ציון כולל לכל מי שהציון הכולל שלו מחושב</li><li data-n="2">הטבלה: תא לכל משימה, וציון כולל בעמודות האחרונות</li></ol></figcaption></figure>
+ <h3>איך מחושב הציון הכולל</h3>
+ <ul>
+  <li>הציון הסופי מורכב מרכיב <b>"העבודה"</b> (ממוצע משוקלל של המשימות לפי המשקלים) ומרכיבים נוספים שתגדירו, כמו תלמידאות או בחנים.</li>
+  <li>הציון מחושב רק כשסכום המשקלים הרלוונטיים הוא <b>100%</b> וכל רכיב בעל משקל קיבל ציון. המערכת לא מנרמלת משקלים בעצמה.</li>
+  <li>העיגון נעשה פעם אחת בסוף: 89.49 הופך ל-89, ו-89.50 הופך ל-90.</li>
+  <li>אם הציון "לא מחושב", לחצו על התלמיד, ותראו את הסיבה.</li>
+ </ul>
+ <h3>פעולות במסך</h3>
+ <ul>
+  <li><b>הקלדת ציון בתא</b> (0 עד 100) שומרת אותו. ציון שנקבע מהניקוד מקורו במסך הבדיקה.</li>
+  <li><b>ציון קבוצתי:</b> כפתור בראש עמודת משימה קבוצתית. הציון חל על חברי הקבוצה שהשתתפו בהגשה. תלמיד שהצטרף אחרי ההגשה אינו כלול.</li>
+  <li><b>ציון אישי:</b> הקלדה בתא של תלמיד. מסומן 👤 ולא נדרס אוטומטית, אלא אם סימנתם דריסה.</li>
+  <li><b>החרגה:</b> "החרגת משימה…" לכל המחזור או לתלמיד אחד. המערכת מציגה מראש את ההשפעה על סכום המשקלים.</li>
+  <li><b>משקלים אישיים</b> לתלמיד (סימון ⚖), כשצריך להתאים משקלים במקרה מיוחד.</li>
+  <li><b>התאמת משקלי משימות למחזור</b> ו"עריכת הערכה" לרכיבים נוספים ולתבניות.</li>
+ </ul>
+ <div class="box tip"><b class="t">שינוי ציון או משקל לא מפרסם דבר</b>הפרסום תמיד פעולה נפרדת.</div>
+</section>
+
+<section class="panel" id="s-publish" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>פרסום ומה התלמיד רואה</h2>
+ <p>יש שלושה דברים שמתפרסמים לתלמיד, וכל אחד נשלט בנפרד:</p>
+ <table>
+  <thead><tr><th>מה</th><th>איך מפרסמים</th><th>איך מבטלים</th></tr></thead>
+  <tbody>
+   <tr><td>משוב והערות</td><td>"שליחת משוב לתלמידים" במסך הבדיקה, או "שלח משוב לעבודות הבדוקות" ברשימת ההגשות</td><td>"בטל פרסום כל המשוב"</td></tr>
+   <tr><td>ציון משימה</td><td>"פרסם ציון" בכרטיס "מצב פרסום"</td><td>"בטל פרסום"</td></tr>
+   <tr><td>ציון כולל</td><td>במסך "ציונים", לתלמיד או לכולם</td><td>ביטול פרסום ליד התלמיד</td></tr>
+  </tbody>
+ </table>
+ <div class="box warn"><b class="t">ביטול פרסום</b>מסיר את הפריט מהתצוגה של התלמיד, והתוכן וההיסטוריה נשמרים אצלכם. אפשר לפרסם שוב. מה שתלמיד כבר הספיק לראות אי אפשר למחוק.</div>
+ <p>אם שיניתם ציון אחרי שפורסם, מצב הפרסום יציג "פורסם X, כעת Y: שינוי שטרם פורסם". תלמיד יראה את השינוי רק אחרי שתפרסמו מחדש.</p>
+ <h3>המסך של התלמיד</h3>
+ <figure><img src="img/22-student-home.jpg" alt="מסך הבית של התלמיד" loading="lazy"><figcaption>כך נראית ההתחלה אצל תלמיד (נתוני דמה): הקבוצה שלו, משימות, משוב וציונים שפורסמו, והגאנט האישי שלו.</figcaption></figure>
+ <figure><img src="img/23-student-submit.jpg" alt="מסך ההגשה אצל התלמיד" loading="lazy"><figcaption>הגשת קובץ אצל התלמיד.</figcaption></figure>
+ <ul><li>התלמיד רואה את המשימות שלו ואת המועדים התקפים לו, כולל ארכה.</li><li>הציון מוצג שלם. לא מוצג פירוט קריטריונים או ניקוד.</li><li>בהתאם להגדרות, הוא יכול לראות גם את חברי קבוצתו.</li></ul>
+</section>
+
+<section class="panel" id="s-notif" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>התראות ותזכורות</h2>
+ <p>המסך נקרא "התראות ותזכורות", עם ארבע לשוניות: <b>התראות</b>, <b>תזכורות</b>, <b>יומן שליחה</b> ו<b>הגדרות</b>.</p>
+ <figure><img src="img/18-notifications.jpg" alt="התראות" loading="lazy"><figcaption>לשונית "התראות".<ol><li data-n="1">ארבע הלשוניות</li><li data-n="2">מסננים: פתוחות, לא נקראו, טופלו, הכול</li></ol></figcaption></figure>
+ <h3>נקראה לעומת טופלה</h3>
+ <p><b>"נקראה"</b> אומר שראיתם. <b>"טופלה"</b> אומר שהבעיה נפתרה. ברוב הסוגים זה קורה אוטומטית כשהמצב משתנה (למשל אחרי הגשה). אירוע כמו קובץ גדול מדי נסגר על ידכם. בכל התראה יש כפתור "פתח" שמוביל למקום הרלוונטי.</p>
+ <h3>תזכורות הגשה</h3>
+ <figure><img src="img/19-reminders.jpg" alt="תזכורות" loading="lazy"><figcaption>לשונית "תזכורות": הגדרה לפי משימה.</figcaption></figure>
+ <ul>
+  <li>תזכורת נשלחת לתלמיד שטרם הגיש, לפי הימים שהגדרתם ביחס למועד. היא מתייחסת למועד התקף של כל קבוצה או תלמיד, כולל ארכה.</li>
+  <li>היא נפסקת מעצמה כשמוגשת עבודה או כשהמועד זז, ולא נשלחת פעמיים.</li>
+  <li>תזכורות נשלחות רק על משימות הגשה. אפשר לכבות או להתאים לכל משימה ("הגדרה למשימה").</li>
+  <li>בדוא"ל נשלח קישור בלבד, בלי ציון ובלי מידע רגיש.</li>
+  <li>יש <b>מכסה יומית לדוא"ל</b> (מוצגת במסך). כשהיא מלאה, ההודעות נשלחות במערכת בלבד, והדוא"ל נשלח כשיהיה מקום. לכן אל תניחו שכל תזכורת תישלח גם בדוא"ל.</li>
+  <li>בגרסה שבה אתם משתמשים הבדיקה רצה אוטומטית פעם ביום. בדמו מריצים אותה ידנית.</li>
+ </ul>
+</section>
+
+<section class="panel" id="s-tools" data-s>
+ <span class="badge">מסך אחר מסך</span>
+ <h2>Notes, גיבוי וארכיון</h2>
+ <h3>פנקס Notes</h3>
+ <figure><img src="img/20-notes.jpg" alt="פנקס Notes" loading="lazy"><figcaption>פנקס אישי: חיפוש, סינון לפי שיוך, סימון ומחזור.</figcaption></figure>
+ <ul>
+  <li>פנקס אישי שלכם בלבד. התלמידים לא רואים אותו, והוא אינו נכלל בייצוא מחזור למורה אחר.</li>
+  <li>אפשר לשייך Note לתלמיד, לקבוצה או להשאיר כללי, ולסמן "דורש טיפול" או "טופל".</li>
+  <li>הכפתור הצף <span class="btnname">📝 Note חדש</span> זמין בכל מסך. אפשר לגרור אותו למקום נוח, ולחיצה ימנית מאפסת את מיקומו. כשפותחים אותו מתוך בדיקת הגשה, ה-Note משויך לקבוצה או לתלמיד של ההגשה.</li>
+  <li>מחיקה מעבירה לסל, וכל עריכה נשמרת בהיסטוריה.</li>
+ </ul>
+ <h3>גיבוי ושחזור</h3>
+ <figure><img src="img/21-backup.jpg" alt="גיבוי ושחזור" loading="lazy"><figcaption>מסך "גיבוי ושחזור".<ol><li data-n="1">שמירת גיבוי לקובץ</li><li data-n="2">שחזור מקובץ גיבוי</li></ol></figcaption></figure>
+ <table>
+  <tbody>
+   <tr><th>הגיבוי כולל</th><th>הגיבוי לא כולל</th></tr>
+   <tr><td>תלמידים, קבוצות, משימות, הגשות (כרשומות), הערות, מחוונים של המשימות, ציונים והגדרות</td><td>קובצי ההגשות עצמם ב-Drive, בנק המשימות המשותף והגדרות ההתראות. פנקס ה-Notes נכלל רק אם סימנתם.</td></tr>
+  </tbody>
+ </table>
+ <ul>
+  <li><b>מומלץ</b> להוריד גיבוי אחת לשבוע ולשמור אותו מחוץ למערכת. כדאי גם לשמור גיבוי לפני שינויים גדולים.</li>
+  <li><b>שחזור:</b> מוצגת תצוגה מקדימה, נשמר גיבוי אוטומטי של המצב הנוכחי לפני כן, ובזמן השחזור לא ניתן להגיש. נשמרים עד 10 גיבויים אוטומטיים, ואפשר "חזרה למצב הזה".</li>
+  <li><b>קובץ חסר:</b> אם קובץ הגשה נמחק מ-Drive, הרשומה מסומנת "קובץ חסר". החזירו את הקובץ ולחצו "קישור מחדש".</li>
+  <li><b>הגשות שמורות בצד:</b> הגשות שהגיעו אחרי הגיבוי. הן לא נמחקות, וצירוף נעשה רק באישורכם.</li>
+  <li><b>סל מחזורים ויומן החלטות</b> נמצאים באותו מסך.</li>
+ </ul>
+ <div class="box info"><b class="t">"ממתין לשמירה"</b>שינוי נשמר קודם במכשיר ונשלח לשרת ברקע. עד שהשרת מאשר, הוא מסומן "ממתין לשמירה". אפשר להמשיך לעבוד, אבל אל תסגרו את הדף עד שהסימון נעלם. אם השמירה נכשלת, תופיע הודעה והטקסט לא אובד.</div>
+ <h3>תשתית AI (ניסיוני)</h3>
+ <p>במסך הבדיקה יש חלונית ניסיונית, כבויה כברירת מחדל. אין בה חיבור לספק בינה מלאכותית אמיתי ולא מועבר מידע החוצה. הצעות שלה אינן גלויות לתלמיד, ורק הערה שאישרתם ושלחתם תופיע להם. אם אינכם משתמשים בה, אין צורך לגעת בה.</p>
+</section>
+
+<section class="panel" id="mistakes" data-s>
+ <span class="badge">טעויות נפוצות</span>
+ <h2>דברים שכדאי למנוע</h2>
+ <div class="box mistake"><b class="t">חשבתי שההערות נשלחו</b>הערות הן טיוטה עד "שליחת משוב לתלמידים". בדקו בתיבה "משוב לתלמידים" שכתוב "פורסמו" ולא "טיוטה".</div>
+ <div class="box mistake"><b class="t">קבעתי ציון משימה וחשבתי שהתלמיד רואה אותו</b>קביעת ציון אינה פרסום. פרסום הוא פעולה נפרדת.</div>
+ <div class="box mistake"><b class="t">הציון הכולל "לא מחושב"</b>בדרך כלל חסר ציון לרכיב בעל משקל, או שסכום המשקלים אינו 100%. פתחו את התלמיד בטבלה וראו את הסיבה.</div>
+ <div class="box mistake"><b class="t">החרגתי משימה לתלמיד שלא הגיש</b>החרגה משנה את סכום המשקלים ועלולה למנוע חישוב ציון. לתלמיד שלא הגיש נהוג להזין 0.</div>
+ <div class="box mistake"><b class="t">ערכתי משימה מהבנק וציפיתי שהמחזורים האחרים ישתנו</b>כל משימה במחזור היא עותק נפרד.</div>
+ <div class="box mistake"><b class="t">מחקתי קובץ מ-Drive</b>הגיבוי לא כולל קבצים. קובץ שנמחק לצמיתות לא ישוחזר ממנו. אל תמחקו קובצי הגשות מ-Drive.</div>
+ <div class="box mistake"><b class="t">שיניתי מחוון וחשבתי שהציונים הישנים ישתנו</b>בדיקה שהתחילה נשארת לפי המחוון שבו התחלתם.</div>
+ <div class="box mistake"><b class="t">סגרתי את הדף בזמן "ממתין לשמירה"</b>המתינו שהסימון ייעלם.</div>
+ <div class="box mistake"><b class="t">רציתי להזיז משימה בגאנט ולא הצלחתי</b>עריכה אפשרית רק בתצוגת "כל הכיתה", ולא כשהמחזור בארכיון.</div>
+</section>
+
+<section class="panel" id="faq" data-s>
+ <span class="badge">שאלות נפוצות</span>
+ <h2>שאלות ותשובות</h2>
+ <details class="acc"><summary>כתבתי הערות על ההגשה. האם התלמיד קיבל אותן?</summary><div>לא בהכרח. רק פעולת השליחה בתיבת "משוב לתלמידים" מפרסמת אותן.</div></details>
+ <details class="acc"><summary>התלמיד ציין שהמשימה הושלמה. האם היא אושרה?</summary><div>לא. השלמה דורשת אישור שלכם. אחוז התקדמות אינו אישור ואינו ציון.</div></details>
+ <details class="acc"><summary>מה ההבדל בין ארכה להחרגה?</summary><div>ארכה משנה מועד הגשה ליחידה אחת. החרגה מוציאה משימה מחישוב הציון הכולל.</div></details>
+ <details class="acc"><summary>איפה נשמרים הנתונים?</summary><div>בחשבון Google של המורה שהקים את המערכת, ולא במאגר משותף של כל המורים.</div></details>
+ <details class="acc"><summary>האם תלמיד יכול לראות את הניקוד לפי הקריטריונים?</summary><div>לא. הוא רואה רק ציון שלם שפרסמתם.</div></details>
+ <details class="acc"><summary>הגשה נקלטה אבל אי אפשר ללחוץ "בדיקה". למה?</summary><div>כנראה ההמרה ל-PDF עדיין מתבצעת או נכשלה. אם נכשלה, היכנסו ל"עוד" ובחרו "נסה המרה שוב" או "בקש PDF נוסף".</div></details>
+ <details class="acc"><summary>אפשר להחזיר לתיקון גרסה ישנה?</summary><div>לא, רק את הגרסה האחרונה של העבודה.</div></details>
+ <details class="acc"><summary>הורדתי גיבוי. האם הקבצים של התלמידים בפנים?</summary><div>לא. הקבצים נשארים ב-Drive. הגיבוי מכיל את נתוני הניהול.</div></details>
+ <details class="acc"><summary>מה ההבדל בין ארכיון לסל?</summary><div>ארכיון הוא מחזור שהסתיים: נשמר לקריאה בלבד. סל הוא מחזור שהוצא מהרשימה לפני החלטה על מחיקה לצמיתות, ונשמר לפחות 30 יום.</div></details>
+ <details class="acc"><summary>תלמיד שאל שאלה על הערה. איפה עונים?</summary><div>במסך הבית תופיע הודעה עם השאלה. לחיצה עליה פותחת אותה ישירות במסך הבדיקה.</div></details>
+ <details class="acc"><summary>איך מכניסים את חופשות משרד החינוך לגאנט?</summary><div>ב"חופשות ואילוצים" לוחצים "בחירת חופשות וחגים". בפעם הראשונה בוחרים יהודי או ערבי. המערכת מזהה לבד את שנות הלימודים של המחזור ומציעה את כל החגים והחופשות הרשמיים, אבל לא מכניסה כלום מעצמה: מסמנים פריטים, או לוחצים על שם קבוצה (למשל "חגי ישראל וחופשות רשמיות" או "מוסלמים") כדי לסמן אותה כולה. פתיחה חוזרת לא מכפילה ולא דורסת עריכות.</div></details>
+ <details class="acc"><summary>קיבלתי הודעה שהמערכת עדיין לא עודכנה לגרסה החדשה, כשניסיתי להכניס חופשות. מה זה?</summary><div>העדכון של המערכת מתפשט בהדרגה בין המורים. עד שהמערכת שלכם תתעדכן, הכנסת חופשות משרד החינוך ועריכת חופשות לא זמינות, וכל שאר המערכת ממשיכה לעבוד כרגיל. נסו שוב בעוד זמן קצר. בינתיים אפשר להוסיף חופשות ידנית.</div></details>
+ <details class="acc"><summary>אין חופשות לשנה שלי. מה עושים?</summary><div>הלוח הרשמי של שנת לימודים נוסף למערכת בעדכון, אחרי שמשרד החינוך מפרסם אותו ואנחנו מאמתים אותו. עד אז תוצג הודעה, ואפשר להוסיף חופשות ידנית בכפתור "+ חופשה או אילוץ". אחרי העדכון תפתחו שוב את "בחירת חופשות וחגים".</div></details>
+ <details class="acc"><summary>האם התזכורות נשלחות בדוא"ל תמיד?</summary><div>לא. יש מכסה יומית. כשהיא מלאה, ההודעות נשלחות במערכת בלבד.</div></details>
+</section>
+
+<section class="panel" id="glossary" data-s>
+ <span class="badge">מילון מונחים</span>
+ <h2>מושגים בקצרה</h2>
+ <table>
+  <tbody>
+   <tr><th>מחזור</th><td>שנת עבודה של קבוצת תלמידים, עם כל הנתונים שלה.</td></tr>
+   <tr><th>הגשת תוצר</th><td>משימה שהתלמיד מעלה אליה קובץ.</td></tr>
+   <tr><th>אישור ביצוע</th><td>משימה שהמורה מאשר שהושלמה, בלי הגשת קובץ.</td></tr>
+   <tr><th>טיוטה</th><td>הערה שנכתבה ועוד לא נשלחה. התלמיד לא רואה אותה.</td></tr>
+   <tr><th>משוב</th><td>ההערות שנשלחו לתלמיד בפעולת שליחה.</td></tr>
+   <tr><th>מחוון בסיס, מחוון משימה</th><td>ספרייה משותפת, ועותק שמשויך למשימה במחזור.</td></tr>
+   <tr><th>ארכה</th><td>מועד הגשה שונה ליחידה אחת.</td></tr>
+   <tr><th>החרגה</th><td>הוצאת משימה מחישוב הציון הכולל.</td></tr>
+   <tr><th>השלמה</th><td>מצב שמאושר על ידי המורה בלבד.</td></tr>
+   <tr><th>חותמת זמן</th><td>מועד ההגשה שנשמר אוטומטית עם כל גרסה.</td></tr>
+   <tr><th>ארכיון</th><td>מחזור לקריאה בלבד.</td></tr>
+  </tbody>
+ </table>
+</section>
+
+<section class="panel" id="checklist" data-s>
+ <span class="badge">לסיום</span>
+ <h2>רשימת בדיקה למורה מתחיל</h2>
+ <ul class="check">
+  <li>אני יודע לבחור מחזור ולהבדיל בין מחזורים.</li>
+  <li>הכנסתי תלמידים ושייכתי אותם לקבוצות.</li>
+  <li>יצרתי משימות, יש להן משקלים וסכומם 100%.</li>
+  <li>אני יודע להבדיל בין "אישור ביצוע" ל"הגשת תוצר".</li>
+  <li>אני מבין שמשימה מהבנק היא עותק.</li>
+  <li>אני יודע לפתוח הגשה, לכתוב הערות ולשלוח משוב.</li>
+  <li>אני יודע מה נשאר פנימי ומה מתפרסם.</li>
+  <li>שייכתי מחוונים וקבעתי ציון משימה.</li>
+  <li>אני יודע להחזיר עבודה לתיקון.</li>
+  <li>אני יודע איפה מוצאים התראות ואיך מורידים גיבוי.</li>
+ </ul>
+ <div class="box tip"><b class="t">הדרך הטובה ביותר ללמוד</b>הקימו מחזור בדיקה קטן עם שני תלמידים ומשימה אחת, והריצו את כל התהליך: תכנון, הגשה, בדיקה, משוב, ציון ופרסום.</div>
+</section>
+
+</main>
+</div>
+
+<footer>מערכת ליווי עבודות גמר • מדריך שימוש למורים • פותח על ידי אורי העליון</footer>
+<dialog class="zoom" id="zoom"><img alt=""></dialog>
+
+<script>
+(function(){
+ var toc=document.getElementById('toc'),btn=document.getElementById('tocBtn');
+ btn.addEventListener('click',function(){var o=toc.classList.toggle('open');btn.setAttribute('aria-expanded',o)});
+ toc.querySelectorAll('.toc-body a').forEach(function(a){a.addEventListener('click',function(){toc.classList.remove('open')})});
+ // הדגשת הפרק הנוכחי
+ var links={};toc.querySelectorAll('.toc-body a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+ if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){Object.values(links).forEach(function(a){a.classList.remove('on')});var a=links[e.target.id];if(a)a.classList.add('on')}})},{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('section[data-s]').forEach(function(s){io.observe(s)});
+ }
+ // חיפוש
+ var q=document.getElementById('q'),secs=[].slice.call(document.querySelectorAll('section[data-s]'));
+ q.addEventListener('input',function(){
+  var t=q.value.trim();
+  secs.forEach(function(s){var hit=!t||s.textContent.indexOf(t)>-1;s.classList.toggle('hide',!hit);var a=links[s.id];if(a)a.classList.toggle('hide',!hit)});
+  if(t)document.querySelectorAll('details.acc').forEach(function(d){d.open=d.textContent.indexOf(t)>-1});
+ });
+ // הגדלת תמונה בלחיצה
+ var z=document.getElementById('zoom'),zi=z.querySelector('img');
+ document.querySelectorAll('figure img').forEach(function(im){im.addEventListener('click',function(){zi.src=im.src;zi.alt=im.alt;z.showModal()})});
+ z.addEventListener('click',function(){z.close()});
+ // הדפסה: פתיחת כל השאלות
+ window.addEventListener('beforeprint',function(){document.querySelectorAll('details.acc').forEach(function(d){d.dataset.was=d.open?'1':'0';d.open=true})});
+ window.addEventListener('afterprint',function(){document.querySelectorAll('details.acc').forEach(function(d){d.open=d.dataset.was==='1'})});
+})();
+</script>
+</body>
+</html>

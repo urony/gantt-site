@@ -60,11 +60,13 @@ export function validateCycle(c) {
   return errors;
 }
 
+const s0school = (state) => (state && state.cycle && state.cycle.school) || '';
 export function createCycle(state, data) {
   const errors = validateCycle(data);
   if (errors.length) throw new Error(errors.join('. '));
   const s = clone(state);
   s.cycle = { id: s.cycle ? s.cycle.id : newId('cyc'), name: data.name.trim(), start: data.start || '', end: data.end || '', defenseDate: data.defenseDate || '' };
+  if (s0school(state)) s.cycle.school = s0school(state); // סוג בית הספר הוא הגדרת מחזור ואינו נמחק בשמירת פרטי המחזור
   return s;
 }
 

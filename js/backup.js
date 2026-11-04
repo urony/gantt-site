@@ -33,7 +33,7 @@ export function makeBackup(root, session, cycleId, { includePersonal = false, no
   const c = getCycle(root, cycleId);
   const b = {
     kind: KIND, version: VERSION, savedAt: now, notice: FILES_NOTICE,
-    cycle: { id: c.id, name: c.name, start: c.start, end: c.end, defenseDate: c.defenseDate, archived: !!c.archived },
+    cycle: { id: c.id, name: c.name, start: c.start, end: c.end, defenseDate: c.defenseDate, school: c.school || '', archived: !!c.archived },
     data: Object.fromEntries(DATA_KEYS.map((k) => [k, clone(c.data[k] || [])])),
   };
   if (includePersonal) b.personal = NB.personalBackup(root.notesBook, session, { now });
@@ -70,7 +70,7 @@ export function validate(backup) {
   }
   return {
     kind: KIND, version: VERSION, savedAt: iso(backup.savedAt) ? backup.savedAt : '',
-    cycle: { id: c.id, name: c.name.trim(), start: c.start || '', end: c.end || '', defenseDate: c.defenseDate || '', archived: !!c.archived },
+    cycle: { id: c.id, name: c.name.trim(), start: c.start || '', end: c.end || '', defenseDate: c.defenseDate || '', school: c.school === 'jewish' || c.school === 'arab' ? c.school : '', archived: !!c.archived },
     data, hasPersonal: !!(backup.personal && backup.personal.kind === NB.BACKUP_KIND),
   };
 }
@@ -205,10 +205,10 @@ export async function restoreCycle(io, session, backup, { lateDecision, now = no
     };
     let r3 = io.getRoot();
     if (cur) {
-      r3 = setCycle(r3, cycleId, (c) => { Object.assign(c, { name: clean.cycle.name, start: clean.cycle.start, end: clean.cycle.end, defenseDate: clean.cycle.defenseDate, archived: clean.cycle.archived, data }); delete c.restoring; });
+      r3 = setCycle(r3, cycleId, (c) => { Object.assign(c, { name: clean.cycle.name, start: clean.cycle.start, end: clean.cycle.end, defenseDate: clean.cycle.defenseDate, ...(clean.cycle.school ? { school: clean.cycle.school } : {}), archived: clean.cycle.archived, data }); delete c.restoring; });
     } else {
       r3 = clone(r3);
-      r3.cycles.push({ id: cycleId, name: clean.cycle.name, start: clean.cycle.start, end: clean.cycle.end, defenseDate: clean.cycle.defenseDate, archived: clean.cycle.archived, data });
+      r3.cycles.push({ id: cycleId, name: clean.cycle.name, start: clean.cycle.start, end: clean.cycle.end, defenseDate: clean.cycle.defenseDate, school: clean.cycle.school || '', archived: clean.cycle.archived, data });
     }
     r3.lastRestore = result;
     // הגשות שלא צורפו נשמרות במקום מוגן (עם רשומת ההגשה המלאה והפניה לקובץ), והחלטת המורה נרשמת
@@ -233,7 +233,7 @@ export function undoToAutoBackup(root, session, autoId, { now = nowIso() } = {})
   let r = cur ? addAutoBackup(root, session, a.cycleId, 'לפני חזרה למצב קודם', { now }) : clone(root);
   const bk = a.backup;
   if (cur) {
-    r = setCycle(r, a.cycleId, (c) => { Object.assign(c, { name: bk.cycle.name, start: bk.cycle.start, end: bk.cycle.end, defenseDate: bk.cycle.defenseDate, archived: bk.cycle.archived, data: clone(bk.data) }); delete c.restoring; });
+    r = setCycle(r, a.cycleId, (c) => { Object.assign(c, { name: bk.cycle.name, start: bk.cycle.start, end: bk.cycle.end, defenseDate: bk.cycle.defenseDate, ...(bk.cycle.school ? { school: bk.cycle.school } : {}), archived: bk.cycle.archived, data: clone(bk.data) }); delete c.restoring; });
   } else {
     r.cycles.push({ ...clone(bk.cycle), data: clone(bk.data) });
   }

@@ -43,7 +43,7 @@ export function sliceOf(root, id) {
   const c = getCycle(root, id);
   return {
     version: 2,
-    cycle: { id: c.id, name: c.name, start: c.start, end: c.end, defenseDate: c.defenseDate },
+    cycle: { id: c.id, name: c.name, start: c.start, end: c.end, defenseDate: c.defenseDate, school: c.school || '' },
     ...clone(emptyData()),
     ...clone(c.data),
     aiEnabled: !!root.aiEnabled,
@@ -66,7 +66,7 @@ export function writeSlice(root, id, flat, { bankOnly = false } = {}) {
   r.notifSettings = normalizeSettings(flat.notifSettings || r.notifSettings);
   if (bankOnly) return r;
   const c = getCycle(r, id);
-  if (flat.cycle) Object.assign(c, { name: flat.cycle.name, start: flat.cycle.start, end: flat.cycle.end, defenseDate: flat.cycle.defenseDate });
+  if (flat.cycle) Object.assign(c, { name: flat.cycle.name, start: flat.cycle.start, end: flat.cycle.end, defenseDate: flat.cycle.defenseDate }, flat.cycle.school ? { school: flat.cycle.school } : {});
   for (const k of DATA_KEYS) c.data[k] = clone(flat[k]);
   return r;
 }
