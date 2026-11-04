@@ -20,5 +20,16 @@
   "pkg": "pkg-2.json",
   "sha256": "875b4a0dedd3abf541ee0c929c063461567f100e5427ed405eaae607ac919be4",
   "prevVersion": 1
+ },
+ {
+  "at": "2026-11-04T16:04:29.677Z",
+  "seq": 3,
+  "version": 2,
+  "percent": 100,
+  "urgent": false,
+  "hold": false,
+  "pkg": "pkg-2.json",
+  "sha256": "875b4a0dedd3abf541ee0c929c063461567f100e5427ed405eaae607ac919be4",
+  "prevVersion": 2
  }
 ]
