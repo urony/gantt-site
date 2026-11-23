@@ -7,20 +7,15 @@
 import { renderShellText } from './lib/shell-render.js';
 import { isDeploymentId, execUrl, appLink } from './lib/server-link.js';
 
+// ההרשאות שהמשגר מבקש: בדיוק הסט ש-Google אישרה באימות OAuth (23.11.2026), בלי cloud-platform הרחבה ובלי Drive.
 export const SCOPES = [
   'https://www.googleapis.com/auth/script.projects',
   'https://www.googleapis.com/auth/script.deployments',
-  'https://www.googleapis.com/auth/cloud-platform', // יצירת פרויקט ענן אישי והפעלת Apps Script API בו (ניסוי 2). זו ההרשאה המפחידה ביותר במסכי ההסכמה
+  'https://www.googleapis.com/auth/cloudplatformprojects', // projects.create: יצירת פרויקט ענן אישי
+  'https://www.googleapis.com/auth/service.management', // services.enable: הפעלת Apps Script API בפרויקט
   'https://www.googleapis.com/auth/userinfo.email',
 ];
-// סט צר לניסוי (טרם נבדק מול Google): יצירת פרויקט וההפעלת API בלי cloud-platform הרחבה. מופעל רק בהגדרה narrowScopes, לצורך ניסוי ובקשת אימות.
-export const NARROW_SCOPES = [
-  'https://www.googleapis.com/auth/script.projects',
-  'https://www.googleapis.com/auth/script.deployments',
-  'https://www.googleapis.com/auth/cloudplatformprojects', // projects.create
-  'https://www.googleapis.com/auth/service.management', // services.enable
-  'https://www.googleapis.com/auth/userinfo.email',
-];
+export const NARROW_SCOPES = SCOPES; // שם ישן, נשמר לתאימות בדיקות
 export const STATE_KEY = 'gantt-launcher-state-v1';
 const SCRIPT_API = 'https://script.googleapis.com/v1';
 const CRM = 'https://cloudresourcemanager.googleapis.com/v3';

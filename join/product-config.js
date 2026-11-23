@@ -7,5 +7,5 @@ window.LAUNCHER_CONFIG = {
   "triggerEveryMin": 0,
   "testMode": false,
   "demo": false,
-  "narrowScopes": false
+  "narrowScopes": true
 };

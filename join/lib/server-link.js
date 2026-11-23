@@ -6,6 +6,9 @@ export const SERVER_PARAM = 's';
 export const isDeploymentId = (s) => /^[A-Za-z0-9_-]{20,200}$/.test(String(s || ''));
 export const execUrl = (id) => `https://script.google.com/macros/s/${id}/exec`;
 
+// אימייל תקין (לתצוגה בהסבר למורה בלבד; אינו מתווסף לשום כתובת)
+export const isEmail = (s) => typeof s === 'string' && s.length <= 254 && /^[^\s@<>"'&?#]{1,64}@[^\s@<>"'&?#]{1,190}$/.test(s);
+
 // כתובת השרת לשימוש האתר: remoteUrl מפורש בהגדרה קודם (בדיקות, שרת בודד); אחרת, אם מותר, מזהה מהקישור. אחרת null = מצב דמו.
 export function resolveRemoteUrl(cfg, search = '') {
   if (!cfg) return null;

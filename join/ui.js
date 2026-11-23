@@ -1,12 +1,12 @@
 // ממשק משגר המוצר (עברית). הלוגיקה בפועל נמצאת ב-flow.js (נבדקת בבדיקות); כאן רק תצוגה, חיבור ל-Google Identity ופעולות הדפדפן.
 // האסימון נשמר בזיכרון הדף בלבד. באחסון המקומי נשמרים רק מזהים ציבוריים ושני סימוני "קראתי / הפעלתי".
-import { createSetupFlow, STEPS, SCOPES as FULL_SCOPES, NARROW_SCOPES } from './flow.js';
+import { createSetupFlow, STEPS, SCOPES } from './flow.js';
 import { createDemoGoogle } from './demo-google.js';
+import { isEmail } from './lib/server-link.js';
 import { loadVerifiedPackage } from './lib/package-loader.js';
 import { sha512 } from './lib/sha512.js';
 
 const cfg = window.LAUNCHER_CONFIG;
-const SCOPES = cfg && cfg.narrowScopes ? NARROW_SCOPES : FULL_SCOPES;
 const $ = (id) => document.getElementById(id);
 const UI_KEY = 'gantt-launcher-ui-v1';
 let token = null;
@@ -57,13 +57,24 @@ function render() {
   const n = currentStep(); const s = flow.state();
   SECTIONS.forEach((id, i) => { $(id).hidden = i + 1 !== n; });
   document.querySelectorAll('#stepper li').forEach((li) => { const i = Number(li.dataset.i); li.className = i < n || s.initialized ? 'done' : i === n ? 'now' : ''; });
-  if (n === 5 && s.execUrl) $('openApp').href = s.execUrl;
+  if (n === 5 && s.execUrl) { $('openApp').href = s.execUrl; fillHelp('s5', s.execUrl); }
   if (n === 6) {
     $('s6init').hidden = !!s.initialized; $('s6done').hidden = !s.initialized;
-    if (!s.initialized) $('openInit').href = flow.initUrl();
+    if (!s.initialized) { $('openInit').href = flow.initUrl(); fillHelp('s6', flow.initUrl()); }
     else { const link = flow.appLink(); $('appLink').textContent = link; $('openMine').href = link; }
   }
   if (n === 4) renderProgress();
+}
+// הסבר חלופי למורה שבדפדפנו מחוברים כמה חשבונות: קישור להדבקה בחלון גלישה בסתר, ובו מחובר חשבון אחד בלבד.
+// נבדק בפועל (23.11.2026): הוספת authuser לכתובת לא פותרת את הבעיה בשרתי Apps Script, ולכן אין אותה בקישורים.
+function fillHelp(prefix, url) {
+  const acct = isEmail(ui.acct) ? ui.acct : '';
+  $(prefix + 'acct').textContent = acct || 'החשבון שבו הקמתם את המערכת';
+  $(prefix + 'link').textContent = url;
+}
+async function rememberAccount() {
+  if (demo) return;
+  try { const j = await call('GET', 'https://www.googleapis.com/oauth2/v3/userinfo'); if (isEmail(j && j.email)) { saveUi({ acct: j.email }); render(); } } catch (e) { /* בלי אימייל: ההסבר החלופי מציג ניסוח כללי */ }
 }
 function renderProgress(active, failed) {
   const s = flow.state(); const doneFlags = { cloud: !!s.projectNumber, api: !!s.apiEnabled, script: !!s.scriptId, content: !!s.contentUploaded, version: !!s.version, deploy: !!s.deploymentId };
@@ -87,7 +98,7 @@ $('login').addEventListener('click', () => {
       const granted = String(resp.scope || '');
       const missing = SCOPES.filter((sc) => !granted.includes(sc.split('/').pop()));
       if (missing.length) { msg.hidden = false; msg.textContent = 'לא סומנו כל ההרשאות. לחצו שוב על "התחברות עם Google" וסמנו את כל התיבות.'; return; }
-      token = resp.access_token; render(); startRun();
+      token = resp.access_token; render(); rememberAccount(); startRun();
     },
     error_callback: () => { msg.hidden = false; msg.textContent = 'חלון ההתחברות נסגר או נחסם. אם הדפדפן חסם חלונות קופצים, אפשרו אותם לאתר הזה ונסו שוב.'; },
   }).requestAccessToken();

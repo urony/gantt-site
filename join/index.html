@@ -63,7 +63,7 @@
       <li>חיבור יציב לאינטרנט ו-5 דקות רצופות.</li>
       <li>לא צריך אמצעי תשלום. ההקמה חינמית.</li>
     </ul>
-    <div class="note"><strong>חשוב לדעת מראש:</strong> Google תציג אזהרה אדומה "האפליקציה לא אומתה". זה צפוי, כי המערכת נוצרת בחשבון שלכם. ההוראות בהמשך מראות בדיוק על מה ללחוץ.</div>
+    <div class="note"><strong>חשוב לדעת מראש:</strong> בכניסה הראשונה Google תציג בקשת הרשאות רגילה. בהמשך, באישור השרת האישי שנוצר בחשבון שלכם, תופיע אזהרה אדומה "האפליקציה לא אומתה". זה צפוי כי הוא נוצר בחשבון שלכם, וההוראות בהמשך מראות בדיוק על מה ללחוץ.</div>
     <label class="chk"><input type="checkbox" id="ack"><span>קראתי והבנתי, ואני רוצה להקים את המערכת בחשבון Google שלי.</span></label>
     <button id="go1" disabled>מתחילים</button>
   </section>
@@ -85,7 +85,7 @@
     <h2>התחברות עם Google</h2>
     <p>לחצו על הכפתור ובחרו את חשבון Google שבו תרצו להקים את המערכת. יופיע חלון עם בקשת הרשאות.</p>
     <div class="note"><strong>סמנו את כל התיבות</strong> בחלון ההרשאות. אם לא תסמנו הכול, ההקמה תיכשל ותצטרכו להתחיל את השלב הזה מחדש.</div>
-    <div class="note"><strong>על האזהרה של Google ("Google hasn't verified this app"):</strong> היא מופיעה כי המערכת עדיין לא עברה את תהליך האימות הרשמי של Google, שנועד לחברות גדולות. זה לא אומר שיש בעיה. בדקו שני דברים לפני שממשיכים: (1) שם האפליקציה בחלון הוא <strong>"מערכת ליווי עבודות גמר - הקמה"</strong>; (2) הגעתם לכאן מהקישור שקיבלתם מאורי. אם כן, לחצו <span class="en">Continue</span> (או "מתקדם" ואז "מעבר ל... (לא בטוח)"). <strong>אל</strong> תלחצו על הכפתור הכחול <span class="en">Back to safety</span>, כי הוא מבטל. אם בשלב כלשהו השם שונה או שלא הגעתם מהקישור של אורי, עצרו.</div>
+    <div class="note"><strong>על מסך ההרשאות של Google:</strong> אפליקציית ההקמה מאומתת על ידי Google, ולכן בשלב הזה אמורה להופיע בקשת הרשאות רגילה, בלי אזהרת "Google hasn't verified this app". בדקו לפני שממשיכים: (1) שם האפליקציה בחלון הוא <strong>"מערכת ליווי עבודות גמר - הקמה"</strong>; (2) הגעתם לכאן מקישור שקיבלתם ממקור שאתם סומכים עליו (למשל מי שהמליץ לכם על המערכת), ושכתובת הדף היא של האתר הזה. אם הופיעה בכל זאת אזהרת "לא מאומת", או שהשם שונה, עצרו ופנו למי שהמליץ לכם על המערכת. את האזהרה של Google בשלב אישור השרת האישי שלכם (בהמשך) מסבירים בהוראות שבדף ההדרכה.</div>
     <p class="sub">ההרשאות האלה משמשות רק להקמה חד-פעמית (יצירת הסקריפט והפרויקט האישי שלכם). המשגר אינו שומר אותן ואינו שולח אותן לאף מקום.</p>
     <button id="login">התחברות עם Google</button>
     <div id="loginMsg" class="bad" hidden></div>
@@ -116,6 +116,17 @@
     <a class="btn" id="openApp" href="#" target="_blank" rel="noopener">פתיחת המערכת</a>
     <button id="authDone" class="secondary">אישרתי, בדקו</button>
     <div id="authMsg" class="note" hidden></div>
+    <details class="note" id="s5help">
+      <summary>נפתח "הדף לא נמצא" או "לא ניתן לפתוח את הקובץ"?</summary>
+      <p>זה קורה כשבדפדפן מחובר יותר מחשבון Google אחד, או כשאינכם מחוברים לחשבון שבו הקמתם את המערכת (<strong id="s5acct"></strong>). הפתרון: שהחשבון הזה יהיה היחיד שמחובר בדפדפן.</p>
+      <ol>
+        <li>היכנסו ל-<span class="en">google.com</span>, לחצו על העיגול שלכם בפינה ובחרו <strong>יציאה מכל החשבונות</strong> (<span class="en">Sign out of all accounts</span>).</li>
+        <li>התחברו מחדש <strong>רק</strong> עם החשבון שלמעלה.</li>
+        <li>פתחו שוב את הקישור הזה (או לחצו שוב על הכפתור למעלה):</li>
+      </ol>
+      <div class="linkbox" id="s5link"></div>
+      <p>אפשר גם לעשות זאת בלי להתנתק משאר החשבונות: חלון גלישה בסתר (<span class="en">Ctrl+Shift+N</span>), התחברות בו רק עם החשבון הזה, והדבקת הקישור.</p>
+    </details>
   </section>
 
   <section id="s6" hidden>
@@ -125,7 +136,18 @@
       <a class="btn" id="openInit" href="#" target="_blank" rel="noopener">הקמת תיקיית הנתונים</a>
       <button id="initDone" class="secondary">ראיתי "ההקמה הושלמה", בדקו</button>
       <div id="initMsg" class="note" hidden></div>
-    </div>
+    <details class="note" id="s6help">
+        <summary>נפתח "הדף לא נמצא" או "לא ניתן לפתוח את הקובץ"?</summary>
+        <p>זה קורה כשבדפדפן מחובר יותר מחשבון Google אחד, או כשאינכם מחוברים לחשבון שבו הקמתם את המערכת (<strong id="s6acct"></strong>). הפתרון: שהחשבון הזה יהיה היחיד שמחובר בדפדפן.</p>
+      <ol>
+        <li>היכנסו ל-<span class="en">google.com</span>, לחצו על העיגול שלכם בפינה ובחרו <strong>יציאה מכל החשבונות</strong> (<span class="en">Sign out of all accounts</span>).</li>
+        <li>התחברו מחדש <strong>רק</strong> עם החשבון שלמעלה.</li>
+        <li>פתחו שוב את הקישור הזה (או לחצו שוב על הכפתור למעלה):</li>
+      </ol>
+      <div class="linkbox" id="s6link"></div>
+      <p>אפשר גם לעשות זאת בלי להתנתק משאר החשבונות: חלון גלישה בסתר (<span class="en">Ctrl+Shift+N</span>), התחברות בו רק עם החשבון הזה, והדבקת הקישור.</p>
+      </details>
+      </div>
     <div id="s6done" hidden>
       <h2>המערכת שלכם מוכנה</h2>
       <div class="good">ההקמה הושלמה. הנתונים נשמרים בתיקייה "מערכת ליווי פרויקט גמר" ב-Drive שלכם.</div>
